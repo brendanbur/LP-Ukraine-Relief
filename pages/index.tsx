@@ -129,14 +129,19 @@ const Index = ({
     .map((d) => +d.mc_gross)
     .reduce((acc, donation) => acc + donation)
 
-  const progressBarRef = useRef<HTMLDivElement>(null)
+  const progressBar1Ref = useRef<HTMLDivElement>(null)
+  const progressBar2Ref = useRef<HTMLDivElement>(null)
   const notify = () => toast.success('Copied!')
 
   function updateProgressBar() {
-    const progressBar = progressBarRef.current // corresponding DOM node
+    const progressBar1 = progressBar1Ref.current // corresponding DOM node
+    const progressBar2 = progressBar2Ref.current // corresponding DOM node
     const percentage = Math.floor((donationTotal / GOAL_TOTAL) * 100)
-    if (progressBar) {
-      progressBar.style.width = `${percentage}%`
+    if (progressBar1) {
+      progressBar1.style.width = `${percentage}%`
+    }
+    if (progressBar2) {
+      progressBar2.style.width = `${percentage}%`
     }
   }
 
@@ -286,7 +291,7 @@ const Index = ({
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
-                            className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500"
+                            className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-blue-500"
                             onClick={() => setDonationsOpen(false)}
                           >
                             <span className="sr-only">Close panel</span>
@@ -404,10 +409,10 @@ const Index = ({
         <div className="py-10">
           <div className="mx-auto max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8">
             {/*  */}
-            <main className="px-2 lg:col-span-12 xl:col-span-8">
+            <main className="px-2 md:col-span-12 lg:col-span-8">
               <div className="mt-4">
                 <div className="space-y-8">
-                  <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
+                  <div className="space-y-5 sm:space-y-4 md:max-w-3xl lg:max-w-none">
                     <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                       LP Ukraine Family Relief
                     </h2>
@@ -424,6 +429,114 @@ const Index = ({
                       alt="LP Ukraine Family Relief"
                     />
                   </div>
+                  <aside className="block lg:hidden">
+                    <div className="sticky top-4 space-y-4">
+                      <section aria-labelledby="who-to-follow-heading">
+                        <div className="rounded-lg bg-white shadow">
+                          <div className="space-y-3 p-6">
+                            <h2 className="text-base font-medium text-gray-900">
+                              <span className="text-2xl font-extrabold">
+                                {formatMoney(donationTotal)}
+                                {'   '}
+                              </span>{' '}
+                              <span className="text-sm text-gray-500">
+                                raised of {formatMoney(GOAL_TOTAL)} goal
+                              </span>
+                            </h2>
+                            <div className="relative h-2 overflow-hidden rounded-full">
+                              <div className="absolute h-full w-full bg-gray-200"></div>
+                              <div
+                                ref={progressBar2Ref}
+                                id="bar"
+                                style={{ width: '0%' }}
+                                className="relative h-full bg-blue-500 transition-all duration-1000 ease-out"
+                              ></div>
+                            </div>
+                            <span className="text-sm text-gray-500">
+                              {donations.length} donations
+                            </span>
+                            <div className="flex flex-col items-center space-y-4">
+                              <a
+                                href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
+                                target={`_blank`}
+                                className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                              >
+                                <HeartIcon
+                                  className="-ml-1 mr-2 h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                                <span>Donate now</span>
+                              </a>
+                              <button
+                                type="button"
+                                className="inline-flex w-full items-center justify-center rounded-md  border  border-transparent border-blue-600 px-4 py-4 text-sm font-medium text-blue-600  shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                onClick={() => setShareOpen(true)}
+                              >
+                                <ShareIcon
+                                  className="-ml-1 mr-2 h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                                <span>Share</span>
+                              </button>
+                            </div>
+
+                            {/* <div>
+                        <div className="inline-flex items-center rounded-full bg-blue-50 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100">
+                          <PlusSmIcon
+                            className="h-5 w-5 text-blue-400"
+                            aria-hidden="true"
+                          />
+                        </div>
+                        <span>274 people just donated</span>
+                      </div> */}
+
+                            <div className="mt-9 flow-root">
+                              <ul
+                                role="list"
+                                className=" divide-y divide-gray-200"
+                              >
+                                {donations.slice(0, 3).map((donation) => (
+                                  <li
+                                    key={donation.ipn_track_id}
+                                    className="flex items-center space-x-3 py-4"
+                                  >
+                                    <div className="flex-shrink-0">
+                                      <img
+                                        className="h-8 w-8 rounded-full"
+                                        src="/avatar.svg"
+                                        alt=""
+                                      />
+                                    </div>
+                                    <div className="min-w-0 flex-1">
+                                      <p className="text-sm font-medium text-gray-900">
+                                        <span>{donation.name}</span>
+                                      </p>
+                                      <p className="text-sm text-gray-500">
+                                        <span>
+                                          {' '}
+                                          {formatMoney(
+                                            donation.mc_gross
+                                          )} • {donation.date}
+                                        </span>
+                                      </p>
+                                    </div>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="mt-6">
+                              <button
+                                onClick={() => setDonationsOpen(true)}
+                                className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+                              >
+                                View all
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </aside>
                   <div className="">
                     <h2 className="text-lg font-bold tracking-tight text-gray-900 ">
                       A few words from Logistics Plus
@@ -520,7 +633,7 @@ const Index = ({
                 </div>
               </div>
             </main>
-            <aside className="hidden xl:col-span-4 xl:block">
+            <aside className="hidden lg:col-span-4 lg:block">
               <div className="sticky top-4 space-y-4">
                 <section aria-labelledby="who-to-follow-heading">
                   <div className="rounded-lg bg-white shadow-xl">
@@ -537,7 +650,7 @@ const Index = ({
                       <div className="relative h-2 max-w-xl overflow-hidden rounded-full">
                         <div className="absolute h-full w-full bg-gray-200"></div>
                         <div
-                          ref={progressBarRef}
+                          ref={progressBar1Ref}
                           id="bar"
                           style={{ width: '0%' }}
                           className="relative h-full bg-blue-500 transition-all duration-1000 ease-out"
