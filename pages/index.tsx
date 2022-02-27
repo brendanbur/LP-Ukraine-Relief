@@ -1,106 +1,101 @@
-import { Dialog, Menu, Transition } from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react'
 import { ClipboardCheckIcon, XIcon } from '@heroicons/react/outline'
-import {
-  ChatAltIcon,
-  CodeIcon,
-  DotsVerticalIcon,
-  EyeIcon,
-  FlagIcon,
-  HeartIcon,
-  PlusSmIcon,
-  ShareIcon,
-  StarIcon,
-  ThumbUpIcon
-} from '@heroicons/react/solid'
-import { classNames } from 'lib/helpers'
+import { HeartIcon, PlusSmIcon, ShareIcon } from '@heroicons/react/solid'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const questions = [
+const updates = [
   {
     id: '81614',
-    likes: '29',
-    replies: '11',
-    views: '2.7k',
     author: {
-      name: 'Dries Vincent',
-      imageUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
     },
-    date: 'December 9 at 11:43 AM',
-    datetime: '2020-12-09T11:43:00',
-    href: '#',
-    title: 'What would you have done differently if you ran Jurassic Park?',
+    date: 'Sat, Feb 26, 9:06 AM',
+    title: 'Gretchen’s Saturday update',
     body: `
-      <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
-      <p>Ultimately, I think that if you wanted to run the park successfully and keep visitors safe, the most important thing to prioritize would be&hellip;</p>
+    <p className="text-base">
+    Hello all,
+
+    </p>
+    <p className="text-base">
+    We are overwhelmed by the outpouring of support for our Ukraine team! Thank you to all of you all over the world who have offered money, accommodations and prayers.  I know it means the world to them!  If needed, as things develop, we will set up a fund where people can contribute. Thank you. Right now, though, we’re ok. We’ve got  it covered so far. But thank you.
+
+    </p>
+    <p className="text-base">
+    Three of the girls are in line at the Polish border,
+    expecting to cross within the next 12 hours, when they
+    will be met by Pawel and Ola and taken to Ola’s family’s
+    home. Once they are settled, they will move into an
+    apartment where they will have food and other necessary
+    items. Thank you again to our Poland team for their
+    24/7support!
+  </p>
+  <p className="text-base leading-7">
+    We have called upon several of our friends and
+    colleagues in Poland, the Czech Republic, Bulgaria,
+    Germany, and Hungary who have all agreed to take our
+    folks in and find them temporary homes (thank you—Ola,
+    Pawel, Michal, Emile, Heiko, Ivan, Zig) Several are
+    already on their way. (Please get there safely). Vova is
+    coordinating with us from Ivano-Frankivsk.
+  </p>
+  <p className="text-base leading-7">
+    Another one of the ladies is traveling toward the border
+    today hoping to cross at a different point. Lines at all
+    the borders are very long and slow. Nothing anyone can
+    do about that.
+  </p>
+  <p className="text-base leading-7">
+    We will continue to update you as we get more
+    information on the various members of our team. Thank
+    you again for your continued prayers and concern!
+  </p>
+  <p className="text-base leading-7">
+  G  
+  </p>
     `,
   },
   {
-    id: '821614',
-    likes: '29',
-    replies: '11',
-    views: '2.7k',
+    id: '81614',
     author: {
-      name: 'Dries Vincent',
-      imageUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
+      name: 'Jim Berlin',
+      imageUrl: '/jb.jpg',
+      title: 'CEO, Logistics Plus',
     },
-    date: 'December 9 at 11:43 AM',
-    datetime: '2020-12-09T11:43:00',
-    href: '#',
-    title: 'What would you have done differently if you ran Jurassic Park?',
+    date: 'Fri, Feb 25, 2022, 1:34 PM',
+    title: 'Brief Update',
     body: `
-      <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
-      <p>Ultimately, I think that if you wanted to run the park successfully and keep visitors safe, the most important thing to prioritize would be&hellip;</p>
+    <p className="text-base">
+    All,
+  </p>
+  <p className="text-base leading-7">
+  In light of the deteriorating situation in Ukraine, LP has set up a fund and a network to help any of our colleagues who want to (and can) get out of the country to safety. 
+  </p>
+  <p className="text-base leading-7">
+  We have called upon several of our friends and colleagues in Poland, Czech Republic, Bulgaria, Germany and Hungary who have all agreed to take our folks in and find them temporary homes (thank you—Ola, Pawel, Michal, Emile, Heiko, Ivan, Zig) Several are already on their way.  (Please get there safely).  Vova is coordinating with us from Ivanofrankivsk.  
+  </p>
+  <p className="text-base leading-7">
+  Since this will be a very “fluid” situation, I’ve asked Gretchen to oversee this effort. I know she will be all over the necessary communication and coordination.
+  </p>
+  <p className="text-base leading-7">
+  Thanks, everyone, for your quick and loving support. I will keep everyone apprised of things as they develop. 
+  </p>
+  <p className="text-base leading-7">
+  LP Ukraine colleagues—please know you are in our thoughts and prayers, and that we will do whatever is needed to help out. You are all valued members of the LP family. And we are with you.
+  </p>
+  <p className="text-base leading-7">
+  Stay strong!
+  </p>
+  <p className="text-base leading-7">
+  JB  
+  </p>
     `,
   },
-  {
-    id: '816142',
-    likes: '29',
-    replies: '11',
-    views: '2.7k',
-    author: {
-      name: 'Dries Vincent',
-      imageUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-    },
-    date: 'December 9 at 11:43 AM',
-    datetime: '2020-12-09T11:43:00',
-    href: '#',
-    title: 'What would you have done differently if you ran Jurassic Park?',
-    body: `
-      <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
-      <p>Ultimately, I think that if you wanted to run the park successfully and keep visitors safe, the most important thing to prioritize would be&hellip;</p>
-    `,
-  },
-  {
-    id: '181614',
-    likes: '29',
-    replies: '11',
-    views: '2.7k',
-    author: {
-      name: 'Dries Vincent',
-      imageUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-    },
-    date: 'December 9 at 11:43 AM',
-    datetime: '2020-12-09T11:43:00',
-    href: '#',
-    title: 'What would you have done differently if you ran Jurassic Park?',
-    body: `
-      <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
-      <p>Ultimately, I think that if you wanted to run the park successfully and keep visitors safe, the most important thing to prioritize would be&hellip;</p>
-    `,
-  },
-  // More questions...
 ]
 const whoToFollow = [
   {
@@ -254,9 +249,10 @@ export default function Example() {
       <Head>
         <title>Fundraiser by Logistics Plus</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="icon" href="/favicon.ico"></link>
       </Head>
-      <div className="min-h-full bg-gray-100">
-        <nav className="bg-white shadow">
+      <div className="min-h-full bg-stone-50">
+        <nav className="bg-stone-50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 justify-between">
               <div className="flex">
@@ -275,8 +271,9 @@ export default function Example() {
               </div>
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <button
-                    type="button"
+                  <a
+                    href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
+                    target={`_blank`}
                     className="relative inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
                     <HeartIcon
@@ -284,10 +281,10 @@ export default function Example() {
                       aria-hidden="true"
                     />
                     <span>Donate now</span>
-                  </button>
+                  </a>
                   <button
                     type="button"
-                    className="relative ml-4 inline-flex items-center rounded-md border border-transparent border-blue-600 px-4 py-2 text-sm font-medium text-blue-600  shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="relative ml-4 inline-flex items-center rounded-md border border-transparent border-blue-600 px-4 py-2 text-sm font-medium text-blue-600  shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     onClick={() => setOpen(true)}
                   >
                     <ShareIcon
@@ -309,7 +306,7 @@ export default function Example() {
               <div className="mt-4">
                 <div className="space-y-8">
                   <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
-                    <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                       LP Ukraine Family Relief
                     </h2>
                     <p className="text-lg text-gray-500">
@@ -325,208 +322,92 @@ export default function Example() {
                       alt="LP Ukraine Family Relief"
                     />
                   </div>
+                  <div className="">
+                    <h2 className="text-lg font-bold tracking-tight text-gray-900 ">
+                      A few words from Logistics Plus
+                    </h2>
+                    <div className="mt-6 space-y-6 text-gray-500">
+                      <p className="text-base">
+                        Logistics Plus employs about 50 people in Ukraine. Most
+                        of them are under the age of 35.
+                      </p>
+                      <p className="text-base leading-7">
+                        For a while many thought the invasion wouldn't happen,
+                        and then they thought it would happen mostly in the
+                        eastern part of the country.
+                      </p>
+                      <p className="text-base leading-7">
+                        But now with Kiev being bombarded, the feeling has
+                        changed. Logistics Plus employees could hear explosions
+                        from their offices since Wednesday night.
+                      </p>
+                      <p className="text-base leading-7">
+                        This fund will provide our colleagues in Ukraine support
+                        for any of their needs during this time of war.
+                      </p>
+                    </div>
+                  </div>
+                  <h2 className="text-lg font-bold tracking-tight text-gray-900 ">
+                    Updates ({updates.length})
+                  </h2>
                   <ul role="list" className="space-y-4">
-                    {questions.map((question) => (
+                    {updates.map((update) => (
                       <li
-                        key={question.id}
+                        key={update.id}
                         className="bg-white px-4 py-6 shadow sm:rounded-lg sm:p-6"
                       >
-                        <article
-                          aria-labelledby={'question-title-' + question.id}
-                        >
+                        <article aria-labelledby={'update-title-' + update.id}>
                           <div>
                             <div className="flex space-x-3">
                               <div className="flex-shrink-0">
                                 <img
                                   className="h-10 w-10 rounded-full"
-                                  src={question.author.imageUrl}
+                                  src={update.author.imageUrl}
                                   alt=""
                                 />
                               </div>
                               <div className="min-w-0 flex-1">
                                 <p className="text-sm font-medium text-gray-900">
-                                  <a
-                                    href={question.author.href}
-                                    className="hover:underline"
-                                  >
-                                    {question.author.name}
-                                  </a>
+                                  <span className="">{update.author.name}</span>{' '}
+                                  <span className="text-xs text-gray-400">
+                                    {update.author.title}
+                                  </span>
                                 </p>
                                 <p className="text-sm text-gray-500">
-                                  <a
-                                    href={question.href}
-                                    className="hover:underline"
-                                  >
-                                    <time dateTime={question.datetime}>
-                                      {question.date}
-                                    </time>
-                                  </a>
+                                  <span className="">
+                                    <time>{update.date}</time>
+                                  </span>
                                 </p>
-                              </div>
-                              <div className="flex flex-shrink-0 self-center">
-                                <Menu
-                                  as="div"
-                                  className="relative inline-block text-left"
-                                >
-                                  <div>
-                                    <Menu.Button className="-m-2 flex items-center rounded-full p-2 text-gray-400 hover:text-gray-600">
-                                      <span className="sr-only">
-                                        Open options
-                                      </span>
-                                      <DotsVerticalIcon
-                                        className="h-5 w-5"
-                                        aria-hidden="true"
-                                      />
-                                    </Menu.Button>
-                                  </div>
-
-                                  <Transition
-                                    as={Fragment}
-                                    enter="transition ease-out duration-100"
-                                    enterFrom="transform opacity-0 scale-95"
-                                    enterTo="transform opacity-100 scale-100"
-                                    leave="transition ease-in duration-75"
-                                    leaveFrom="transform opacity-100 scale-100"
-                                    leaveTo="transform opacity-0 scale-95"
-                                  >
-                                    <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                      <div className="py-1">
-                                        <Menu.Item>
-                                          {({ active }) => (
-                                            <a
-                                              href="#"
-                                              className={classNames(
-                                                active
-                                                  ? 'bg-gray-100 text-gray-900'
-                                                  : 'text-gray-700',
-                                                'flex px-4 py-2 text-sm'
-                                              )}
-                                            >
-                                              <StarIcon
-                                                className="mr-3 h-5 w-5 text-gray-400"
-                                                aria-hidden="true"
-                                              />
-                                              <span>Add to favorites</span>
-                                            </a>
-                                          )}
-                                        </Menu.Item>
-                                        <Menu.Item>
-                                          {({ active }) => (
-                                            <a
-                                              href="#"
-                                              className={classNames(
-                                                active
-                                                  ? 'bg-gray-100 text-gray-900'
-                                                  : 'text-gray-700',
-                                                'flex px-4 py-2 text-sm'
-                                              )}
-                                            >
-                                              <CodeIcon
-                                                className="mr-3 h-5 w-5 text-gray-400"
-                                                aria-hidden="true"
-                                              />
-                                              <span>Embed</span>
-                                            </a>
-                                          )}
-                                        </Menu.Item>
-                                        <Menu.Item>
-                                          {({ active }) => (
-                                            <a
-                                              href="#"
-                                              className={classNames(
-                                                active
-                                                  ? 'bg-gray-100 text-gray-900'
-                                                  : 'text-gray-700',
-                                                'flex px-4 py-2 text-sm'
-                                              )}
-                                            >
-                                              <FlagIcon
-                                                className="mr-3 h-5 w-5 text-gray-400"
-                                                aria-hidden="true"
-                                              />
-                                              <span>Report content</span>
-                                            </a>
-                                          )}
-                                        </Menu.Item>
-                                      </div>
-                                    </Menu.Items>
-                                  </Transition>
-                                </Menu>
                               </div>
                             </div>
                             <h2
-                              id={'question-title-' + question.id}
+                              id={'update-title-' + update.id}
                               className="mt-4 text-base font-medium text-gray-900"
                             >
-                              {question.title}
+                              {update.title}
                             </h2>
                           </div>
                           <div
                             className="mt-2 space-y-4 text-sm text-gray-700"
-                            dangerouslySetInnerHTML={{ __html: question.body }}
+                            dangerouslySetInnerHTML={{ __html: update.body }}
                           />
                           <div className="mt-6 flex justify-between space-x-8">
-                            <div className="flex space-x-6">
-                              <span className="inline-flex items-center text-sm">
-                                <button
-                                  type="button"
-                                  className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
-                                >
-                                  <ThumbUpIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                  <span className="font-medium text-gray-900">
-                                    {question.likes}
-                                  </span>
-                                  <span className="sr-only">likes</span>
-                                </button>
-                              </span>
-                              <span className="inline-flex items-center text-sm">
-                                <button
-                                  type="button"
-                                  className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
-                                >
-                                  <ChatAltIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                  <span className="font-medium text-gray-900">
-                                    {question.replies}
-                                  </span>
-                                  <span className="sr-only">replies</span>
-                                </button>
-                              </span>
-                              <span className="inline-flex items-center text-sm">
-                                <button
-                                  type="button"
-                                  className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
-                                >
-                                  <EyeIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                  <span className="font-medium text-gray-900">
-                                    {question.views}
-                                  </span>
-                                  <span className="sr-only">views</span>
-                                </button>
-                              </span>
-                            </div>
+                            <div className="flex space-x-6"></div>
                             <div className="flex text-sm">
                               <span className="inline-flex items-center text-sm">
-                                <button
-                                  type="button"
-                                  className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
+                                <a
+                                  href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
+                                  target={`_blank`}
+                                  className="inline-flex space-x-2 text-blue-400 hover:text-blue-500"
                                 >
-                                  <ShareIcon
+                                  <HeartIcon
                                     className="h-5 w-5"
                                     aria-hidden="true"
                                   />
-                                  <span className="font-medium text-gray-900">
-                                    Share
+                                  <span className="font-medium text-blue-900">
+                                    Donate Now
                                   </span>
-                                </button>
+                                </a>
                               </span>
                             </div>
                           </div>
@@ -553,13 +434,14 @@ export default function Example() {
                         <div
                           ref={progressBarRef}
                           id="bar"
-                          className="relative h-full w-0 bg-green-500 transition-all duration-1000 ease-out"
+                          className="relative h-full w-0 bg-blue-500 transition-all duration-1000 ease-out"
                         ></div>
                       </div>
                       <div>596 donations</div>
                       <div className="flex flex-col items-center space-y-4">
-                        <button
-                          type="button"
+                        <a
+                          href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
+                          target={`_blank`}
                           className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                           <HeartIcon
@@ -567,10 +449,10 @@ export default function Example() {
                             aria-hidden="true"
                           />
                           <span>Donate now</span>
-                        </button>
+                        </a>
                         <button
                           type="button"
-                          className="inline-flex w-full items-center justify-center rounded-md  border  border-transparent border-blue-600 px-4 py-4 text-sm font-medium text-blue-600  shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                          className="inline-flex w-full items-center justify-center rounded-md  border  border-transparent border-blue-600 px-4 py-4 text-sm font-medium text-blue-600  shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                           onClick={() => setOpen(true)}
                         >
                           <ShareIcon
@@ -642,7 +524,7 @@ export default function Example() {
             target="_blank"
             rel="noopener noreferrer"
           >
-                        Powered by{' '}
+            Powered by{' '}
             <Image
               src="/logo.png"
               alt="Logistics Plus"
