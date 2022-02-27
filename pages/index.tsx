@@ -1,13 +1,29 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { ClipboardCheckIcon, XIcon } from '@heroicons/react/outline'
-import { HeartIcon, PlusSmIcon, ShareIcon } from '@heroicons/react/solid'
+import { HeartIcon, ShareIcon } from '@heroicons/react/solid'
 import { formatMoney } from 'lib/helpers'
+import moment from 'moment'
+import { InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { extractSheets } from 'spreadsheet-to-json'
 
+type Donations = {
+  payment_date: string
+  payer_email: string
+  first_name: string
+  last_name: string
+  mc_currency: string
+  mc_gross: string
+  mc_fee: string
+  ipn_track_id: string
+  JSON: string
+  name: string
+  date: string
+}
 const updates = [
   {
     id: '81614',
@@ -62,7 +78,7 @@ const updates = [
     `,
   },
   {
-    id: '81614',
+    id: '81615',
     author: {
       name: 'Jim Berlin',
       imageUrl: '/jb.jpg',
@@ -98,111 +114,19 @@ const updates = [
     `,
   },
 ]
-const donations = [
-  {
-    name: 'Logistics Plus',
-    amount: '500000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 1,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 2,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 3,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 4,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 5,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 6,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 7,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 8,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 9,
-  },
-
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 10,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 11,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 12,
-  },
-  {
-    name: 'Leslie Alexander',
-    amount: '1000',
-    date: '1h ago',
-    imageUrl: '/avatar.svg',
-    id: 13,
-  },
-  // More people...
-]
 
 const URL = 'Https://LPUkraineRelief.com'
 const GOAL_TOTAL = 1000000.0
 
-export default function Example() {
+const Index = ({
+  fallbackData,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const donations = fallbackData.donations
   const [shareOpen, setShareOpen] = useState(false)
   const [donationsOpen, setDonationsOpen] = useState(false)
 
   const donationTotal = donations
-    .map((d) => +d.amount)
+    .map((d) => +d.mc_gross)
     .reduce((acc, donation) => acc + donation)
 
   const progressBarRef = useRef<HTMLDivElement>(null)
@@ -278,9 +202,9 @@ export default function Example() {
                   </button>
                 </div>
                 <div className="sm:flex sm:items-start">
-                  <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-200 sm:mx-0 sm:h-10 sm:w-10">
+                  <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-200 sm:mx-0 sm:h-10 sm:w-10">
                     <ClipboardCheckIcon
-                      className="h-6 w-6 text-green-600"
+                      className="h-6 w-6 text-blue-600"
                       aria-hidden="true"
                     />
                   </div>
@@ -302,7 +226,7 @@ export default function Example() {
                 <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={handleCopy}
                   >
                     Copy
@@ -387,7 +311,7 @@ export default function Example() {
                       className="flex-1 divide-y divide-gray-200 overflow-y-auto"
                     >
                       {donations.map((donation) => (
-                        <li key={donation.id}>
+                        <li key={donation.ipn_track_id}>
                           <div className="group relative flex items-center py-6 px-5">
                             <span className="-m-1 block flex-1 p-1">
                               <div
@@ -398,7 +322,7 @@ export default function Example() {
                                 <span className="relative inline-block flex-shrink-0">
                                   <img
                                     className="h-10 w-10 rounded-full"
-                                    src={donation.imageUrl}
+                                    src="/avatar.svg"
                                     alt=""
                                   />
                                 </span>
@@ -407,7 +331,7 @@ export default function Example() {
                                     {donation.name}
                                   </p>
                                   <p className="truncate text-sm text-gray-500">
-                                    {formatMoney(donation.amount)} •{' '}
+                                    {formatMoney(donation.mc_gross)} •{' '}
                                     {donation.date}
                                   </p>
                                 </div>
@@ -661,13 +585,13 @@ export default function Example() {
                         <ul role="list" className=" divide-y divide-gray-200">
                           {donations.slice(0, 3).map((donation) => (
                             <li
-                              key={donation.id}
+                              key={donation.ipn_track_id}
                               className="flex items-center space-x-3 py-4"
                             >
                               <div className="flex-shrink-0">
                                 <img
                                   className="h-8 w-8 rounded-full"
-                                  src={donation.imageUrl}
+                                  src="/avatar.svg"
                                   alt=""
                                 />
                               </div>
@@ -678,7 +602,7 @@ export default function Example() {
                                 <p className="text-sm text-gray-500">
                                   <span>
                                     {' '}
-                                    {formatMoney(donation.amount)} •{' '}
+                                    {formatMoney(donation.mc_gross)} •{' '}
                                     {donation.date}
                                   </span>
                                 </p>
@@ -721,4 +645,31 @@ export default function Example() {
       </div>
     </>
   )
+}
+
+export default Index
+
+export const getStaticProps = async () => {
+  const credentials = JSON.parse(
+    Buffer.from(process.env.GOOGLE_SERVICE_KEY!, 'base64').toString()
+  )
+  const donations: Donations[] = (
+    await extractSheets({
+      spreadsheetKey: process.env.SHEET_KEY,
+      credentials: credentials,
+      sheetsToExtract: ['donations'],
+    })
+  ).donations.map((d: any) => {
+    return {
+      ...d,
+      name: d.first_name + ' ' + d.last_name,
+      date: moment(d.payment_date).fromNow(),
+    }
+  })
+
+  console.log({ donations })
+  return {
+    props: { fallbackData: { donations } },
+    revalidate: 10,
+  }
 }

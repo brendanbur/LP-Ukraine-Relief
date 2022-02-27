@@ -24,3 +24,13 @@ export const formatMoney = (
   if (number < 0) numberString = `-${numberString}`
   return '$' + numberString
 }
+
+// optionally you can use unfetch package from npm or built yours to handle promise.
+export const fetcher = async (
+  input: RequestInfo,
+  init: RequestInit,
+  ...args: any[]
+) => {
+  const res = await fetch(input, init);
+  return res.json();
+};
