@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { ClipboardCheckIcon, XIcon } from '@heroicons/react/outline'
 import { HeartIcon, PlusSmIcon, ShareIcon } from '@heroicons/react/solid'
+import { formatMoney } from 'lib/helpers'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Fragment, useEffect, useRef, useState } from 'react'
@@ -97,44 +98,128 @@ const updates = [
     `,
   },
 ]
-const whoToFollow = [
+const donations = [
   {
-    name: 'Moustafa Elhadary',
-    handle: 'leonardkrasner',
-    href: '#',
+    name: 'Logistics Plus',
+    amount: '500000',
+    date: '1h ago',
     imageUrl: '/avatar.svg',
+    id: 1,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 2,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 3,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 4,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 5,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 6,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 7,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 8,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 9,
+  },
+
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 10,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 11,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 12,
+  },
+  {
+    name: 'Leslie Alexander',
+    amount: '1000',
+    date: '1h ago',
+    imageUrl: '/avatar.svg',
+    id: 13,
   },
   // More people...
 ]
 
-const donations = [
-  {
-    name: 'Moustafa Elhadary',
-    amount: '$1,000',
-    time: '1 hour ago',
-    imageUrl: '/avatar.svg',
-  },
-]
-
 const URL = 'Https://LPUkraineRelief.com'
+const GOAL_TOTAL = 1000000.0
 
 export default function Example() {
-  const [open, setOpen] = useState(false)
+  const [shareOpen, setShareOpen] = useState(false)
+  const [donationsOpen, setDonationsOpen] = useState(false)
+
+  const donationTotal = donations
+    .map((d) => +d.amount)
+    .reduce((acc, donation) => acc + donation)
+
   const progressBarRef = useRef<HTMLDivElement>(null)
   const notify = () => toast.success('Copied!')
 
   function updateProgressBar() {
     const progressBar = progressBarRef.current // corresponding DOM node
+    const percentage = Math.floor((donationTotal / GOAL_TOTAL) * 100)
     if (progressBar) {
-      progressBar.classList.remove('w-0')
-      progressBar.classList.add('w-[77%]')
+      progressBar.style.width = `${percentage}%`
     }
   }
 
   function handleCopy() {
     navigator.clipboard.writeText(URL)
     notify()
-    setOpen(false)
+    setShareOpen(false)
   }
 
   useEffect(() => {
@@ -146,11 +231,11 @@ export default function Example() {
     <>
       <ToastContainer />
 
-      <Transition.Root show={open} as={Fragment}>
+      <Transition.Root show={shareOpen} as={Fragment}>
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={setOpen}
+          onClose={setShareOpen}
         >
           <div className="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
             <Transition.Child
@@ -186,7 +271,7 @@ export default function Example() {
                   <button
                     type="button"
                     className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    onClick={() => setOpen(false)}
+                    onClick={() => setShareOpen(false)}
                   >
                     <span className="sr-only">Close</span>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
@@ -246,6 +331,99 @@ export default function Example() {
           </div>
         </Dialog>
       </Transition.Root>
+
+      <Transition.Root show={donationsOpen} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 overflow-hidden"
+          onClose={setDonationsOpen}
+        >
+          <div className="absolute inset-0 overflow-hidden">
+            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+
+            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
+              <Transition.Child
+                as={Fragment}
+                enter="transform transition ease-in-out duration-500 sm:duration-700"
+                enterFrom="translate-x-full"
+                enterTo="translate-x-0"
+                leave="transform transition ease-in-out duration-500 sm:duration-700"
+                leaveFrom="translate-x-0"
+                leaveTo="translate-x-full"
+              >
+                <div className="pointer-events-auto w-screen max-w-md">
+                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                    <div className="p-6">
+                      <div className="flex items-start justify-between">
+                        <Dialog.Title className="text-lg font-medium text-gray-900">
+                          {' '}
+                          Donations ({donations.length}){' '}
+                        </Dialog.Title>
+                        <div className="ml-3 flex h-7 items-center">
+                          <button
+                            type="button"
+                            className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500"
+                            onClick={() => setDonationsOpen(false)}
+                          >
+                            <span className="sr-only">Close panel</span>
+                            <XIcon className="h-6 w-6" aria-hidden="true" />
+                          </button>
+                        </div>
+                      </div>
+                      <a
+                        href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
+                        target={`_blank`}
+                        className="relative my-4 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      >
+                        <HeartIcon
+                          className="-ml-1 mr-2 h-5 w-5"
+                          aria-hidden="true"
+                        />
+                        <span>Donate now</span>
+                      </a>
+                    </div>
+                    <ul
+                      role="list"
+                      className="flex-1 divide-y divide-gray-200 overflow-y-auto"
+                    >
+                      {donations.map((donation) => (
+                        <li key={donation.id}>
+                          <div className="group relative flex items-center py-6 px-5">
+                            <span className="-m-1 block flex-1 p-1">
+                              <div
+                                className="absolute inset-0 group-hover:bg-gray-50"
+                                aria-hidden="true"
+                              />
+                              <div className="relative flex min-w-0 flex-1 items-center">
+                                <span className="relative inline-block flex-shrink-0">
+                                  <img
+                                    className="h-10 w-10 rounded-full"
+                                    src={donation.imageUrl}
+                                    alt=""
+                                  />
+                                </span>
+                                <div className="ml-4 truncate">
+                                  <p className="truncate text-sm font-medium text-gray-900">
+                                    {donation.name}
+                                  </p>
+                                  <p className="truncate text-sm text-gray-500">
+                                    {formatMoney(donation.amount)} •{' '}
+                                    {donation.date}
+                                  </p>
+                                </div>
+                              </div>
+                            </span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
       <Head>
         <title>Fundraiser by Logistics Plus</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -284,8 +462,8 @@ export default function Example() {
                   </a>
                   <button
                     type="button"
-                    className="relative ml-4 hidden sm:inline-flex items-center rounded-md border border-transparent border-blue-600 px-4 py-2 text-sm font-medium text-blue-600  shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    onClick={() => setOpen(true)}
+                    className="relative ml-4 hidden items-center rounded-md border border-transparent border-blue-600 px-4 py-2 text-sm font-medium text-blue-600 shadow-sm  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:inline-flex"
+                    onClick={() => setShareOpen(true)}
                   >
                     <ShareIcon
                       className="-ml-1 mr-2 h-5 w-5"
@@ -421,23 +599,29 @@ export default function Example() {
             <aside className="hidden xl:col-span-4 xl:block">
               <div className="sticky top-4 space-y-4">
                 <section aria-labelledby="who-to-follow-heading">
-                  <div className="rounded-lg bg-white shadow">
-                    <div className="p-6">
-                      <h2
-                        id="who-to-follow-heading"
-                        className="text-base font-medium text-gray-900"
-                      >
-                        $58,095 raised of $65,000 goal
+                  <div className="rounded-lg bg-white shadow-xl">
+                    <div className="space-y-3 p-6">
+                      <h2 className="text-base font-medium text-gray-900">
+                        <span className="text-2xl font-extrabold">
+                          {formatMoney(donationTotal)}
+                          {'   '}
+                        </span>{' '}
+                        <span className="text-sm text-gray-500">
+                          raised of {formatMoney(GOAL_TOTAL)} goal
+                        </span>
                       </h2>
                       <div className="relative h-2 max-w-xl overflow-hidden rounded-full">
                         <div className="absolute h-full w-full bg-gray-200"></div>
                         <div
                           ref={progressBarRef}
                           id="bar"
-                          className="relative h-full w-0 bg-blue-500 transition-all duration-1000 ease-out"
+                          style={{ width: '0%' }}
+                          className="relative h-full bg-blue-500 transition-all duration-1000 ease-out"
                         ></div>
                       </div>
-                      <div>596 donations</div>
+                      <span className="text-sm text-gray-500">
+                        {donations.length} donations
+                      </span>
                       <div className="flex flex-col items-center space-y-4">
                         <a
                           href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
@@ -453,7 +637,7 @@ export default function Example() {
                         <button
                           type="button"
                           className="inline-flex w-full items-center justify-center rounded-md  border  border-transparent border-blue-600 px-4 py-4 text-sm font-medium text-blue-600  shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                          onClick={() => setOpen(true)}
+                          onClick={() => setShareOpen(true)}
                         >
                           <ShareIcon
                             className="-ml-1 mr-2 h-5 w-5"
@@ -463,7 +647,7 @@ export default function Example() {
                         </button>
                       </div>
 
-                      <div>
+                      {/* <div>
                         <div className="inline-flex items-center rounded-full bg-blue-50 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100">
                           <PlusSmIcon
                             className="h-5 w-5 text-blue-400"
@@ -471,31 +655,32 @@ export default function Example() {
                           />
                         </div>
                         <span>274 people just donated</span>
-                      </div>
+                      </div> */}
 
-                      <div className="mt-6 flow-root">
-                        <ul
-                          role="list"
-                          className="-my-4 divide-y divide-gray-200"
-                        >
-                          {whoToFollow.map((user) => (
+                      <div className="mt-9 flow-root">
+                        <ul role="list" className=" divide-y divide-gray-200">
+                          {donations.slice(0, 3).map((donation) => (
                             <li
-                              key={user.handle}
+                              key={donation.id}
                               className="flex items-center space-x-3 py-4"
                             >
                               <div className="flex-shrink-0">
                                 <img
                                   className="h-8 w-8 rounded-full"
-                                  src={user.imageUrl}
+                                  src={donation.imageUrl}
                                   alt=""
                                 />
                               </div>
                               <div className="min-w-0 flex-1">
                                 <p className="text-sm font-medium text-gray-900">
-                                  <a href={user.href}>{user.name}</a>
+                                  <span>{donation.name}</span>
                                 </p>
                                 <p className="text-sm text-gray-500">
-                                  <a href={user.href}>{'@' + user.handle}</a>
+                                  <span>
+                                    {' '}
+                                    {formatMoney(donation.amount)} •{' '}
+                                    {donation.date}
+                                  </span>
                                 </p>
                               </div>
                             </li>
@@ -503,12 +688,12 @@ export default function Example() {
                         </ul>
                       </div>
                       <div className="mt-6">
-                        <a
-                          href="#"
+                        <button
+                          onClick={() => setDonationsOpen(true)}
                           className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
                         >
                           View all
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
