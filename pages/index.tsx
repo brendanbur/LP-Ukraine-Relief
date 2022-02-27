@@ -284,7 +284,7 @@ export default function Example() {
                   </a>
                   <button
                     type="button"
-                    className="relative ml-4 inline-flex items-center rounded-md border border-transparent border-blue-600 px-4 py-2 text-sm font-medium text-blue-600  shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="relative ml-4 hidden sm:inline-flex items-center rounded-md border border-transparent border-blue-600 px-4 py-2 text-sm font-medium text-blue-600  shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     onClick={() => setOpen(true)}
                   >
                     <ShareIcon
@@ -302,7 +302,7 @@ export default function Example() {
         <div className="py-10">
           <div className="mx-auto max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8">
             {/*  */}
-            <main className="lg:col-span-12 xl:col-span-8">
+            <main className="px-2 lg:col-span-12 xl:col-span-8">
               <div className="mt-4">
                 <div className="space-y-8">
                   <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
