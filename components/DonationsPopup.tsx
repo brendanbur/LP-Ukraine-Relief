@@ -1,8 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { HeartIcon } from '@heroicons/react/solid'
-import { formatMoney } from 'lib/helpers'
-import { Dispatch, Fragment, SetStateAction } from 'react'
+import { classNames, formatMoney } from 'lib/helpers'
+import moment from 'moment'
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import { Donation } from 'types'
 
@@ -17,6 +18,38 @@ const DonationsPopup = ({
   }
 }) => {
   const { donationsOpen, setDonationsOpen } = popupState
+
+  const tabs = [
+    { name: 'Most Recent', value: 'recent' },
+    { name: 'Top Donations', value: 'top' },
+  ]
+
+  const [currentTab, setCurrentTab] = useState(tabs[0])
+  const [sortedDonations, setSortedDonations] = useState(donations)
+
+  const sortDonations = (value: string) => {
+    if (value === 'recent') {
+      setSortedDonations(
+        donations.sort(function (left, right) {
+          return moment
+            .utc(right.payment_date)
+            .diff(moment.utc(left.payment_date))
+        })
+      )
+    }
+    if (value === 'top') {
+      setSortedDonations(
+        donations.sort((a, b) => {
+          return +b.mc_gross - +a.mc_gross
+        })
+      )
+    }
+  }
+
+  useEffect(() => {
+    sortDonations(currentTab.value)
+  }, [])
+
   return (
     <Transition.Root show={donationsOpen} as={Fragment}>
       <Dialog
@@ -68,11 +101,37 @@ const DonationsPopup = ({
                       <span>Donate now</span>
                     </a>
                   </div>
+                  <div className="border-b border-gray-200">
+                    <div className="px-6">
+                      <nav
+                        className="-mb-px flex space-x-6"
+                        x-descriptions="Tab component"
+                      >
+                        {tabs.map((tab) => (
+                          <button
+                            onClick={() => {
+                              setCurrentTab(tab)
+                              sortDonations(tab.value)
+                            }}
+                            key={tab.name}
+                            className={classNames(
+                              tab.name === currentTab.name
+                                ? 'border-blue-500 text-blue-600'
+                                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+                              'whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium'
+                            )}
+                          >
+                            {tab.name}
+                          </button>
+                        ))}
+                      </nav>
+                    </div>
+                  </div>
                   <ul
                     role="list"
                     className="flex-1 divide-y divide-gray-200 overflow-y-auto"
                   >
-                    {donations.map((donation) => (
+                    {sortedDonations.map((donation) => (
                       <li key={donation.ipn_track_id}>
                         <div className="group relative flex items-center py-6 px-5">
                           <span className="-m-1 block flex-1 p-1">

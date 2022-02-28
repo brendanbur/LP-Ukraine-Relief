@@ -10,4 +10,5 @@ export type Donation = {
     JSON: string
     name: string
     date: string
+    comment?: string
   }

@@ -1,4 +1,4 @@
-import { HeartIcon, ShareIcon } from '@heroicons/react/solid'
+import { FireIcon, HeartIcon, ShareIcon } from '@heroicons/react/solid'
 import DonationsPopup from 'components/DonationsPopup'
 import SharePopup from 'components/SharePopup'
 import Updates from 'components/Updates'
@@ -25,6 +25,33 @@ const Index = ({
   const donationTotal = donations
     .map((d) => +d.mc_gross)
     .reduce((acc, donation) => acc + donation)
+
+  const donationsShortList = () => {
+    const recent = donations
+      .sort(function (left, right) {
+        return moment
+          .utc(right.payment_date)
+          .diff(moment.utc(left.payment_date))
+      })
+      .slice(0, 3)
+
+    const highest = donations.reduce(function (prev, current) {
+      return +prev.mc_gross > +current.mc_gross ? prev : current
+    })
+
+    console.log({ highest })
+
+    return [{ ...highest, comment: 'Top donation' }, ...recent]
+  }
+
+  const totalDonationsInPastDay = () => {
+    const today = moment().startOf('day')
+    const yesterday = moment().subtract(1, 'day').startOf('day')
+    return donations.filter((d) => {
+      const date = moment(d.payment_date)
+      return date.isSameOrAfter(yesterday) && date.isSameOrBefore(today)
+    }).length
+  }
 
   const progressBar1Ref = useRef<HTMLDivElement>(null)
   const progressBar2Ref = useRef<HTMLDivElement>(null)
@@ -181,23 +208,29 @@ const Index = ({
                                 <span>Share</span>
                               </button>
                             </div>
+                            {totalDonationsInPastDay() > 0 && (
+                              <div>
+                                <div className="inline-flex items-center justify-center rounded-full bg-purple-50 px-2 py-2 align-middle text-sm font-medium text-purple-700">
+                                  <FireIcon
+                                    className="h-5 w-5 text-purple-400"
+                                    aria-hidden="true"
+                                  />
+                                </div>
 
-                            {/* <div>
-                        <div className="inline-flex items-center rounded-full bg-blue-50 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100">
-                          <PlusSmIcon
-                            className="h-5 w-5 text-blue-400"
-                            aria-hidden="true"
-                          />
-                        </div>
-                        <span>274 people just donated</span>
-                      </div> */}
+                                <span className="font-semiBold text-purple-700">
+                                  {' '}
+                                  {totalDonationsInPastDay()} people just
+                                  donated
+                                </span>
+                              </div>
+                            )}
 
                             <div className="mt-9 flow-root">
                               <ul
                                 role="list"
                                 className=" divide-y divide-gray-200"
                               >
-                                {donations.slice(0, 3).map((donation) => (
+                                {donationsShortList().map((donation) => (
                                   <li
                                     key={donation.ipn_track_id}
                                     className="flex items-center space-x-3 py-4"
@@ -219,6 +252,15 @@ const Index = ({
                                           {formatMoney(
                                             donation.mc_gross
                                           )} • {donation.date}
+                                          {donation.comment && (
+                                            <>
+                                              {' '}
+                                              •{' '}
+                                              <span className="cursor-pointer underline underline-offset-1">
+                                                {donation.comment}
+                                              </span>
+                                            </>
+                                          )}
                                         </span>
                                       </p>
                                     </div>
@@ -318,20 +360,25 @@ const Index = ({
                           <span>Share</span>
                         </button>
                       </div>
+                      {totalDonationsInPastDay() > 0 && (
+                        <div>
+                          <div className="inline-flex items-center justify-center rounded-full bg-purple-50 px-2 py-2 align-middle text-sm font-medium text-purple-700">
+                            <FireIcon
+                              className="h-5 w-5 text-purple-400"
+                              aria-hidden="true"
+                            />
+                          </div>
 
-                      {/* <div>
-                        <div className="inline-flex items-center rounded-full bg-blue-50 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100">
-                          <PlusSmIcon
-                            className="h-5 w-5 text-blue-400"
-                            aria-hidden="true"
-                          />
+                          <span className="font-semiBold text-purple-700">
+                            {' '}
+                            {totalDonationsInPastDay()} people just donated
+                          </span>
                         </div>
-                        <span>274 people just donated</span>
-                      </div> */}
+                      )}
 
                       <div className="mt-9 flow-root">
                         <ul role="list" className=" divide-y divide-gray-200">
-                          {donations.slice(0, 3).map((donation) => (
+                          {donationsShortList().map((donation) => (
                             <li
                               key={donation.ipn_track_id}
                               className="flex items-center space-x-3 py-4"
@@ -352,6 +399,15 @@ const Index = ({
                                     {' '}
                                     {formatMoney(donation.mc_gross)} •{' '}
                                     {donation.date}
+                                    {donation.comment && (
+                                      <>
+                                        {' '}
+                                        •{' '}
+                                        <span className="cursor-pointer underline underline-offset-1">
+                                          {donation.comment}
+                                        </span>
+                                      </>
+                                    )}
                                   </span>
                                 </p>
                               </div>
