@@ -101,7 +101,7 @@ const DonationsPopup = ({
                       <span>Donate now</span>
                     </a>
                   </div>
-                  <div className="border-b border-gray-200">
+                  {/* <div className="border-b border-gray-200">
                     <div className="px-6">
                       <nav
                         className="-mb-px flex space-x-6"
@@ -126,7 +126,7 @@ const DonationsPopup = ({
                         ))}
                       </nav>
                     </div>
-                  </div>
+                  </div> */}
                   <ul
                     role="list"
                     className="flex-1 divide-y divide-gray-200 overflow-y-auto"
@@ -152,7 +152,7 @@ const DonationsPopup = ({
                                   {donation.name}
                                 </p>
                                 <p className="truncate text-sm text-gray-500">
-                                  {formatMoney(donation.mc_gross)} •{' '}
+                                  {/* {formatMoney(donation.mc_gross)} •{' '} */}
                                   {donation.date}
                                 </p>
                               </div>

@@ -249,9 +249,10 @@ const Index = ({
                                       <p className="text-sm text-gray-500">
                                         <span>
                                           {' '}
-                                          {formatMoney(
+                                          {/* {formatMoney(
                                             donation.mc_gross
-                                          )} • {donation.date}
+                                          )} •  */}
+                                          {donation.date}
                                           {donation.comment && (
                                             <>
                                               {' '}
@@ -397,7 +398,7 @@ const Index = ({
                                 <p className="text-sm text-gray-500">
                                   <span>
                                     {' '}
-                                    {formatMoney(donation.mc_gross)} •{' '}
+                                    {/* {formatMoney(donation.mc_gross)} •{' '} */}
                                     {donation.date}
                                     {donation.comment && (
                                       <>
