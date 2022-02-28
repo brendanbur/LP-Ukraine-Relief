@@ -1,30 +1,48 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { ClipboardCheckIcon, XIcon } from '@heroicons/react/outline'
 import { HeartIcon, ShareIcon } from '@heroicons/react/solid'
+import DonationsPopup from 'components/DonationsPopup'
+import SharePopup from 'components/SharePopup'
 import { formatMoney } from 'lib/helpers'
 import moment from 'moment'
 import { InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { Fragment, useEffect, useRef, useState } from 'react'
-import { toast, ToastContainer } from 'react-toastify'
+import { useEffect, useRef, useState } from 'react'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { extractSheets } from 'spreadsheet-to-json'
+import { Donation } from 'types'
 
-type Donations = {
-  payment_date: string
-  payer_email: string
-  first_name: string
-  last_name: string
-  mc_currency: string
-  mc_gross: string
-  mc_fee: string
-  ipn_track_id: string
-  JSON: string
-  name: string
-  date: string
-}
 const updates = [
+  {
+    id: '18161',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Sun, Feb 26, 4:23 AM',
+    title: 'Gretchen’s Sunday update',
+    body: `
+    <p className="text-base">
+    Hi everyone,
+    </p>
+    <p className="text-base">
+    We have had an incredible outpouring of support, not only from LP employees but also from many of our partners, customers, vendors and friends all over the world.  (Thank you, all) People all want to “do something” to help, so we have set up this website:
+    </p>
+    <p className="text-base">
+    <a className="text-blue-900 underline" href="https://lpukrainerelief.com/">https://lpukrainerelief.com/</a>
+  </p>
+  <p className="text-base leading-7">
+  We will continue to report on the situation, and appreciate all the positive energy being generated as we stand in solidarity with our Ukrainian family. It truly means the world to us!
+  </p>
+  <p className="text-base leading-7">
+  Thanks to all,
+  </p>
+  <p className="text-base leading-7">
+  G  
+  </p>
+    `,
+  },
   {
     id: '81614',
     author: {
@@ -115,8 +133,7 @@ const updates = [
   },
 ]
 
-const URL = 'Https://LPUkraineRelief.com'
-const GOAL_TOTAL = 1000000.0
+const GOAL_TOTAL = 550000.0
 
 const Index = ({
   fallbackData,
@@ -131,7 +148,6 @@ const Index = ({
 
   const progressBar1Ref = useRef<HTMLDivElement>(null)
   const progressBar2Ref = useRef<HTMLDivElement>(null)
-  const notify = () => toast.success('Copied!')
 
   function updateProgressBar() {
     const progressBar1 = progressBar1Ref.current // corresponding DOM node
@@ -145,12 +161,6 @@ const Index = ({
     }
   }
 
-  function handleCopy() {
-    navigator.clipboard.writeText(URL)
-    notify()
-    setShareOpen(false)
-  }
-
   useEffect(() => {
     setTimeout(() => {
       updateProgressBar()
@@ -159,200 +169,12 @@ const Index = ({
   return (
     <>
       <ToastContainer />
+      <SharePopup popupState={{ shareOpen, setShareOpen }} />
+      <DonationsPopup
+        donations={donations}
+        popupState={{ donationsOpen, setDonationsOpen }}
+      />
 
-      <Transition.Root show={shareOpen} as={Fragment}>
-        <Dialog
-          as="div"
-          className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={setShareOpen}
-        >
-          <div className="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-            </Transition.Child>
-
-            {/* This element is to trick the browser into centering the modal contents. */}
-            <span
-              className="hidden sm:inline-block sm:h-screen sm:align-middle"
-              aria-hidden="true"
-            >
-              &#8203;
-            </span>
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              enterTo="opacity-100 translate-y-0 sm:scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            >
-              <div className="inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 sm:align-middle">
-                <div className="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
-                  <button
-                    type="button"
-                    className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    onClick={() => setShareOpen(false)}
-                  >
-                    <span className="sr-only">Close</span>
-                    <XIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
-                <div className="sm:flex sm:items-start">
-                  <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-200 sm:mx-0 sm:h-10 sm:w-10">
-                    <ClipboardCheckIcon
-                      className="h-6 w-6 text-blue-600"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-lg font-medium leading-6 text-gray-900"
-                    >
-                      Help by sharing
-                    </Dialog.Title>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Fundraisers shared on social networks raise up to 5x
-                        more
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={handleCopy}
-                  >
-                    Copy
-                  </button>
-                  <div className="relative w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
-                    <label
-                      htmlFor="name"
-                      className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900"
-                    >
-                      Copy Link
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder={URL}
-                      value={URL}
-                      readOnly
-                      onClick={handleCopy}
-                    />
-                  </div>
-                </div>
-              </div>
-            </Transition.Child>
-          </div>
-        </Dialog>
-      </Transition.Root>
-
-      <Transition.Root show={donationsOpen} as={Fragment}>
-        <Dialog
-          as="div"
-          className="fixed inset-0 overflow-hidden"
-          onClose={setDonationsOpen}
-        >
-          <div className="absolute inset-0 overflow-hidden">
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
-              <Transition.Child
-                as={Fragment}
-                enter="transform transition ease-in-out duration-500 sm:duration-700"
-                enterFrom="translate-x-full"
-                enterTo="translate-x-0"
-                leave="transform transition ease-in-out duration-500 sm:duration-700"
-                leaveFrom="translate-x-0"
-                leaveTo="translate-x-full"
-              >
-                <div className="pointer-events-auto w-screen max-w-md">
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                    <div className="p-6">
-                      <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">
-                          {' '}
-                          Donations ({donations.length}){' '}
-                        </Dialog.Title>
-                        <div className="ml-3 flex h-7 items-center">
-                          <button
-                            type="button"
-                            className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-blue-500"
-                            onClick={() => setDonationsOpen(false)}
-                          >
-                            <span className="sr-only">Close panel</span>
-                            <XIcon className="h-6 w-6" aria-hidden="true" />
-                          </button>
-                        </div>
-                      </div>
-                      <a
-                        href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
-                        target={`_blank`}
-                        className="relative my-4 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      >
-                        <HeartIcon
-                          className="-ml-1 mr-2 h-5 w-5"
-                          aria-hidden="true"
-                        />
-                        <span>Donate now</span>
-                      </a>
-                    </div>
-                    <ul
-                      role="list"
-                      className="flex-1 divide-y divide-gray-200 overflow-y-auto"
-                    >
-                      {donations.map((donation) => (
-                        <li key={donation.ipn_track_id}>
-                          <div className="group relative flex items-center py-6 px-5">
-                            <span className="-m-1 block flex-1 p-1">
-                              <div
-                                className="absolute inset-0 group-hover:bg-gray-50"
-                                aria-hidden="true"
-                              />
-                              <div className="relative flex min-w-0 flex-1 items-center">
-                                <span className="relative inline-block flex-shrink-0">
-                                  <img
-                                    className="h-10 w-10 rounded-full"
-                                    src="/avatar.svg"
-                                    alt=""
-                                  />
-                                </span>
-                                <div className="ml-4 truncate">
-                                  <p className="truncate text-sm font-medium text-gray-900">
-                                    {donation.name}
-                                  </p>
-                                  <p className="truncate text-sm text-gray-500">
-                                    {formatMoney(donation.mc_gross)} •{' '}
-                                    {donation.date}
-                                  </p>
-                                </div>
-                              </div>
-                            </span>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
       <Head>
         <title>Fundraiser by Logistics Plus</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -452,9 +274,9 @@ const Index = ({
                                 className="relative h-full bg-blue-500 transition-all duration-1000 ease-out"
                               ></div>
                             </div>
-                            <span className="text-sm text-gray-500">
+                            <div className="text-lg">
                               {donations.length} donations
-                            </span>
+                            </div>
                             <div className="flex flex-col items-center space-y-4">
                               <a
                                 href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
@@ -656,9 +478,9 @@ const Index = ({
                           className="relative h-full bg-blue-500 transition-all duration-1000 ease-out"
                         ></div>
                       </div>
-                      <span className="text-sm text-gray-500">
+                      <div className="text-lg">
                         {donations.length} donations
-                      </span>
+                      </div>
                       <div className="flex flex-col items-center space-y-4">
                         <a
                           href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
@@ -766,7 +588,7 @@ export const getStaticProps = async () => {
   const credentials = JSON.parse(
     Buffer.from(process.env.GOOGLE_SERVICE_KEY!, 'base64').toString()
   )
-  const donations: Donations[] = (
+  const donations: Donation[] = (
     await extractSheets({
       spreadsheetKey: process.env.SHEET_KEY,
       credentials: credentials,
