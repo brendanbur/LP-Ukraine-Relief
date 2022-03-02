@@ -3,6 +3,118 @@ import React from 'react'
 
 const updates = [
   {
+    id: '18898161213243342',
+    author: {
+      name: 'Jim Berlin',
+      imageUrl: '/jb.jpg',
+      title: 'CEO, Logistics Plus',
+    },
+    date: 'Tue, Mar 1, 2:41 PM',
+    title: 'Just had a zoom call from Poland with Ola and the girls',
+    body: `
+      <p className="text-base">
+      SO good to see them. They are tired, but they are safe and look fine and are very thankful for everyone’s support. (
+      I told them we will ALL help in ANY way we can and that they are heroes. 💪
+      </p>
+      <p className="text-base">
+      Sleep well, ladies.
+      </p>
+      <p className="text-base leading-7">
+      (And thank you, Ola 😘)
+      </p>
+      <p className="text-base leading-7">
+      JB
+      </p>
+      `,
+  },
+  {
+    id: '18898161',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Tue, Mar 1, 1:00 PM',
+    title: 'Gretchen’s Tuesday report',
+    body: `
+      <p className="text-base">
+      More good news to report today:  we now have a total of seven safe and secure after their recent arrival in Katowice, Poland.  Three of them—Maryna, Tania and  Katia got some food, a shower and a good night’s sleep at Ola’s house  after their >48 hours in transit, and this morning all headed right back to the border to welcome and to help the many other refugees who have also made the journey 💪💪💪.  God bless them 🙏
+      </p>
+      <p className="text-base">
+      Some more folks are being driven to the border through a coordinated effort of LP colleagues and our many wonderful connections in Hungary and elsewhere in Europe. We are so fortunate to have all of you in our lives!
+      </p>
+      <p className="text-base">
+      Also we are happy to report that we have reached our initial goal of $550,000 to support our colleagues in Ukraine.  Isn’t that awesome?!  Nearly 200 donations from around the LP world, from friends, family, customers, employees, vendors…Amazing!  Donations in any amount are still welcome, and very much appreciated as, sadly, there will be more help required over time for sure.
+      </p>
+      <p className="text-base">
+      Your emails of support and encouragement have been wonderful to read. We hope to bring you more good news tomorrow.
+      </p>
+      <p className="text-base leading-7">
+      G  
+      </p>
+      `,
+  },
+  {
+    id: '1889816121342',
+    author: {
+      name: 'Jim Berlin',
+      imageUrl: '/jb.jpg',
+      title: 'CEO, Logistics Plus',
+    },
+    date: 'Tue, Mar 1, 4:06 AM',
+    title: 'Thought for Today',
+    body: `
+      <p className="text-base">
+      "War is a defeat for humanity”.
+      </p>
+      <p className="text-base">
+      —Pope John Paul II
+      </p>
+      <p className="text-base leading-7">
+      JB
+      </p>
+      `,
+  },
+  {
+    id: '18898161',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Mon, Feb 28, 8:07 AM',
+    title: 'Gretchen’s Monday report',
+    body: `
+      <p className="text-base">
+      Good morning everyone!
+      </p>
+      <p className="text-base">
+      LOTS of good news to start the week:
+      </p>
+      <p className="text-base">
+      First, Maryna, Katia and Tania have finally crossed into Poland after over three days of waiting. They are exhausted but our friends Ola and her parents are taking them into their home to rest, and then settling them into an apartment.
+      </p>
+      <p className="text-base">
+      Also, Anastasia, her baby Artur, Lyudmyla and Iryna have arrived in Romania and are now heading to Poland as well. 
+      </p>
+      <p className="text-base">
+      In the first 24 hours, over 100 of you have already contributed over $10,000 to our new fund, and more is on the way.  
+      </p>
+      <p className="text-base">
+      <a className="text-blue-900 underline" href="https://lpukrainerelief.com/">https://lpukrainerelief.com/</a>
+      </p>
+      <p className="text-base leading-7">
+      We are so grateful to our superheroes in Poland and to all of you. We could not be doing this without you!
+      </p>
+      <p className="text-base leading-7">
+      Thanks to all,
+      </p>
+      <p className="text-base leading-7">
+      G  
+      </p>
+      `,
+  },
+  {
     id: '18161',
     author: {
       name: 'Gretchen Seth',
