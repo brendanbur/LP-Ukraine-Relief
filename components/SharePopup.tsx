@@ -4,7 +4,7 @@ import { Dispatch, Fragment, SetStateAction, useState } from 'react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const URL = 'Https://LPUkraineRelief.com'
+const URL = 'https://LPUkraineRelief.com'
 
 function SharePopup({
   popupState,
