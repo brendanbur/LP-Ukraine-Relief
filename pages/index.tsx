@@ -38,9 +38,6 @@ const Index = ({
     const highest = donations.reduce(function (prev, current) {
       return +prev.mc_gross > +current.mc_gross ? prev : current
     })
-
-    console.log({ highest })
-
     return [{ ...highest, comment: 'Top donation' }, ...recent]
   }
 
@@ -232,7 +229,7 @@ const Index = ({
                               >
                                 {donationsShortList().map((donation) => (
                                   <li
-                                    key={donation.ipn_track_id}
+                                    key={donation.id}
                                     className="flex items-center space-x-3 py-4"
                                   >
                                     <div className="flex-shrink-0">
@@ -297,7 +294,7 @@ const Index = ({
                         eastern part of the country.
                       </p>
                       <p className="text-base leading-7">
-                        But now with Kiev being bombarded, the feeling has
+                        But now with Kyiv being bombarded, the feeling has
                         changed. Logistics Plus employees could hear explosions
                         from their offices since Wednesday night.
                       </p>
@@ -381,7 +378,7 @@ const Index = ({
                         <ul role="list" className=" divide-y divide-gray-200">
                           {donationsShortList().map((donation) => (
                             <li
-                              key={donation.ipn_track_id}
+                              key={donation.id}
                               className="flex items-center space-x-3 py-4"
                             >
                               <div className="flex-shrink-0">
@@ -466,13 +463,14 @@ export const getStaticProps = async () => {
     })
   ).donations.map((d: any) => {
     return {
-      ...d,
+      id: Math.floor(Math.random() * 5000) + d.ipn_track_id + Math.floor(Math.random() * 500),
       name: d.first_name + ' ' + d.last_name,
       date: moment(d.payment_date).fromNow(),
+      mc_gross: +d.mc_gross,
+      payment_date: d.payment_date,
     }
   })
 
-  console.log({ donations })
   return {
     props: { fallbackData: { donations } },
     revalidate: 10,

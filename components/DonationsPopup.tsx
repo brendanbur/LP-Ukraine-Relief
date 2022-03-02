@@ -132,7 +132,7 @@ const DonationsPopup = ({
                     className="flex-1 divide-y divide-gray-200 overflow-y-auto"
                   >
                     {sortedDonations.map((donation) => (
-                      <li key={donation.ipn_track_id}>
+                      <li key={donation.id}>
                         <div className="group relative flex items-center py-6 px-5">
                           <span className="-m-1 block flex-1 p-1">
                             <div
