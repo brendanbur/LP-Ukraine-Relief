@@ -21,6 +21,7 @@ const Index = ({
   const donations = fallbackData.donations
   const [shareOpen, setShareOpen] = useState(false)
   const [donationsOpen, setDonationsOpen] = useState(false)
+  const [percentage, setPercentage] = useState(0);
 
   const donationTotal = donations
     .map((d) => +d.mc_gross)
@@ -56,12 +57,13 @@ const Index = ({
   function updateProgressBar() {
     const progressBar1 = progressBar1Ref.current // corresponding DOM node
     const progressBar2 = progressBar2Ref.current // corresponding DOM node
-    const percentage = Math.floor((donationTotal / GOAL_TOTAL) * 100)
+    const local_percentage = Math.floor((donationTotal / GOAL_TOTAL) * 100)
+    setPercentage(local_percentage)
     if (progressBar1) {
-      progressBar1.style.width = `${percentage}%`
+      progressBar1.style.width = `${local_percentage}%`
     }
     if (progressBar2) {
-      progressBar2.style.width = `${percentage}%`
+      progressBar2.style.width = `${local_percentage}%`
     }
   }
 
@@ -166,7 +168,7 @@ const Index = ({
                                 {'   '}
                               </span>{' '}
                               <span className="text-sm text-gray-500">
-                                raised of {formatMoney(GOAL_TOTAL)} goal
+                                raised of {formatMoney(GOAL_TOTAL)} goal ({percentage}%)
                               </span>
                             </h2>
                             <div className="relative h-2 overflow-hidden rounded-full">
@@ -319,7 +321,7 @@ const Index = ({
                           {'   '}
                         </span>{' '}
                         <span className="text-sm text-gray-500">
-                          raised of {formatMoney(GOAL_TOTAL)} goal
+                          raised of {formatMoney(GOAL_TOTAL)} goal ({percentage}%)
                         </span>
                       </h2>
                       <div className="relative h-2 max-w-xl overflow-hidden rounded-full">
