@@ -3,6 +3,404 @@ import React from 'react'
 
 const updates = [
   {
+    id: '0012',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Wed, Mar 23, 1:15 PM',
+    title: 'Gretchen’s report from Poland - Day 1',
+    body: `
+      <p className="text-base">
+      Hi all, 
+      </p>
+      <p className="text-base">
+      Greetings from Lublin, our sister city in Poland! We traveled here today from Rzeszow to meet with the deputy marshal of the Voivodeship of Lublin (equivalent to our Lt. Governor).
+      </p>
+      <p className="text-base">
+      We received the warmest reception from Marshal Wojciechowski and his staff. 
+      </p>
+      <img src="pol1.jpg"/>
+      <p className="text-base">
+      Inna, our new project manager from Ukraine, me, the Marshal, his staff member Izabel, Rachel of Erie News Now
+      </p>
+      <p className="text-base">
+      They told us about their efforts to help the Ukrainians arriving there, and showed us their office building which has been repurposed into housing and a supplies warehouse. 
+      </p>
+      <p className="text-base">
+      We toured the Lublin Cultural Center which has also made living space for families, and has set up a play center for moms and kids, with books in Ukrainian. But the staff says the language doesn’t matter - the kids find ways to communicate.
+      </p>
+      <img src="pol2.jpg"/>
+      <p className="text-base">
+
+      The train station has set up a medical center trackside, and used every inch of available office space for accommodations for passengers connecting through Lublin to other points, in Poland and beyond. 
+      </p>
+      <img src="pol3.jpg"/>
+      <img src="pol4.jpg"/>
+      <p className="text-base">
+
+      We met many volunteers, and every one of them was so excited to be able to help (reminded me so much of LP!). There were many tears as they described what they have seen, mixed with smiles as they told us with pride of their contributions. 
+      </p>
+      <p className="text-base">
+      The Marshal got very emotional (I did too!) when thanking Erie for all our efforts, and reminded us that more is needed!
+      </p>
+      <p className="text-base">
+      Please know that anything you contribute will go directly to Ukraine relief.  Thank you! 
+      </p>
+      <img src="pol5.jpg"/>
+      <p className="text-base">
+      G
+      </p>
+    `
+  },
+  {
+    id: '0011',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Tue, Mar 22, 4:20 AM',
+    title: 'Gretchen’s Tuesday report',
+    body: `
+      <p className="text-base">
+      Hi all,
+      </p>
+      <p className="text-base">
+      We are getting some good exposure in Erie for our fund raising efforts and relief supplies collections.  Local media is happy to spread the word that we are accepting items at the Erie Times-News Building. 
+      </p>
+      <p className="text-base">
+      As mentioned earlier, Rep. Bob Merski is leading an effort to collect items at Erie’s many social clubs, to be sent to Lublin, Erie’s sister city in Poland. Lublin has welcomed over 30,000 refugees from Ukraine. 
+      </p>
+      <p className="text-base">
+      Rep. Merski was kind enough to connect us with several Lublin officials, and I hope to meet them this week during my visit in Poland. I am joined here by Rachel Knapp and Brian Schnieders of Lilly Broadcasting, who are gathering stories for a series of reports on the Ukraine war, to be aired in April. More on that later.
+      </p>
+      <p className="text-base">
+      Thanks,
+      </p>
+      <p className="text-base">
+      G
+      </p>
+    `
+  },
+  {
+    id: '0010',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Sat, Mar 19, 6:00 AM',
+    title: 'Gretchen’s week end report',
+    body: `
+      <p className="text-base">
+      Hi all,
+      </p>
+      <p className="text-base">
+      Another good week:  we have connected with our sister city of Lublin in Poland, and we are working with Rep. Bob Merski and Mayor Joe Schember and are now collecting needed items for Ukrainian refugees to send there.  We will be accepting donations at the Erie Times-News building from Monday-Friday from 8am to 5pm, and any other time by appointment.  We already have a good supply of blankets, clothing and household items, but much more is needed.  Thanks as always for your support!
+      </p>
+      <p className="text-base">
+      A big thank you to ROMOLO’S for the large donation of foil wrapped chocolate hearts, a very sweet gesture! 😊 I intend to deliver them personally to our folks in Poland as I head there this coming week.
+      </p>
+      <p className="text-base">
+      Please keep your donations coming, and keep all our colleagues in your thoughts and prayers!
+      </p>
+      <p className="text-base">
+      G
+      </p>
+      <p className="text-base">
+      PS--please see the first picture from our new warehouse in Rzeszow, Poland to support these efforts. 
+      </p>
+      <img src="whs.jpg"/>
+    `
+  },
+  {
+    id: '0009',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Wed, Mar 16, 2:00 PM',
+    title: 'Gretchen’s Wednesday report',
+    body: `
+      <p className="text-base">
+      Hi all,
+      </p>
+      <p className="text-base">
+      I am happy to report that we have brought another Ukraine employee safely to Poland, and she is already settled into housing.  
+      </p>
+      <p className="text-base">
+      In other good news, our relief fund has now exceeded US$637,000.  What an amazing achievement! Please keep the donations coming, as we have lots of good uses for the funds--helping out on both sides of the border.  
+      </p>
+      <p className="text-base">
+      We made up some nice Ukraine t-shirts for our employees, so we decided to gather for a group message of solidarity this morning.  Here is the video – don’t blink or you will miss it 😊 <a href="https://www.tiktok.com/@logisticsplus/video/7075716436165004590">https://www.tiktok.com/@logisticsplus/video/7075716436165004590</a>   
+      </p>
+      <p className="text-base">
+      I will be heading to Poland next week to visit our newly arrived teammates in Poland, and bring messages of encouragement to all those remaining in Ukraine. I will try my best to convey the magnitude of the feelings expressed by all of LP and our friends and customers throughout the world.  Your support means the world to us.  Slave Ukrayini!
+      </p>
+      <p className="text-base">
+      G
+
+      </p>
+    `
+  },
+  {
+    id: '0008',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Sat, Mar 12, 2:45 PM',
+    title: 'Gretchen’s Saturday report',
+    body: `
+      <p className="text-base">
+      Hi all,
+      </p>
+      <p className="text-base">
+      LP Ukraine has been supported by multiple LP offices worldwide, with everything from cash donations to personal assistance at the borders.  Today we would like to give a big shoutout to our LP Germany partner, Carl Polzin.  Together with one of their customers, they gathered and shipped a full truckload of supplies to the Romania-Ukraine border (see photo and story below.)  Included were canned goods, snacks and masks which were collected on very short notice.  What a terrific effort!  As they said, it is nice to see how we all stand together with Ukraine. 
+      </p>
+      <p className="text-base">
+      Thank you LP Germany project team and Carl Polzin!
+      </p>
+      <p className="text-base">
+      G
+      </p>
+      <img src="post.png"/>
+    `
+  },
+  {
+    id: '0007',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Wed, Mar 9, 4:45 PM',
+    title: 'Gretchen’s Wednesday update',
+    body: `
+      <p className="text-base">
+      Hi all,
+      </p>
+      <p className="text-base">
+      We continue to see support for Ukraine from friends and associates all over the world.  Just yesterday, we received word that our friends and warehouse partner in the UK, Xpand Logistics, successfully delivered a full 40’ trailer of diabetic meds to Lviv, Ukraine.  A lot of the meds were packed in shoe boxes and hand delivered to individuals by a relay system.  
+      </p>
+      <p className="text-base">
+      They are collecting a small shipment of insulin, and they plan to ship an additional 13 x 40’ trailers of diabetic meds this week.
+      </p>
+      <p className="text-base">
+      We don’t often consider all the things that are disrupted by this crisis. This is yet another example of the generosity and compassion of our extended LP family.  Thank you, Xpand!
+      </p>
+      <p className="text-base">
+      G
+      </p>
+    `
+  },
+  {
+    id: '0006',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Tue, Mar 8, 2:00 PM',
+    title: 'Gretchen’s Tuesday update',
+    body: `
+    <p className="text-base">
+    Hi all,
+    </p>
+    <p className="text-base">
+    Since yesterday, another young employee, her mom and her 3-month old baby crossed the border from Ukraine to Slovakia and made their way to Poland, where Ola and her parents welcomed them into their home.  This makes a total of fourteen people who have been successfully relocated and settled, during a time when nearly a million Ukrainians are leaving the country.  It has been challenging to find housing, but our Poland team is amazing!
+    </p>
+    <p className="text-base">
+    Speaking of amazing, please take the time to watch this.  What a moving example of one person, doing what he can do.  There have been many stories like this in recent weeks.  It restores my faith in humanity! 
+    </p>
+    <p className="text-base">
+    <a href="https://www.msnbc.com/ali-velshi/watch/-you-can-t-prepare-yourself-for-this-i-cry-everyday-volunteer-on-the-hungary-ukraine-border-134705733911">MSNBC Video</a>
+    </p>
+    <p className="text-base">
+    Take care,
+    </p>
+    <p className="text-base">
+    G
+    </p>
+    `
+  },
+  {
+    id: '0005',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Mon, Mar 7, 2:00 PM',
+    title: 'Gretchen’s Monday report',
+    body: `
+    <p className="text-base">
+    Hello all,
+    </p>
+    <p className="text-base">
+    We are happy to report that Irina and two family members have finally arrived in Poland, at 2:30am local time, after nearly 40 hours at the border.  They are safe in a hotel, and will be moved to longer-term accommodations soon.
+    </p>
+    <p className="text-base">
+    At this moment we have no one else in transit, so we are focusing on getting relief and medical supplies to anyone who needs them.  LP Germany is helping with this effort, along with other LP global offices.  Your contributions will help us to purchase whatever we can in-region, and ship things that are in short supply there.  Thank you!
+    </p>
+    <p className="text-base">
+    Also, I know the news stories always refer to Ukraine as “the size of Texas”.  But many of us don’t know how truly BIG Texas is.  I thought this might give everyone a clearer picture of just how big a country Ukraine is.
+    </p>
+    <img src="map.jpg"/>
+    <p className="text-base">
+    G
+    </p>
+    `
+  },
+  {
+    id: '0004',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Sun, Mar 6, 6:00 AM',
+    title: 'Gretchen’s Sunday report',
+    body: `
+    <p className="text-base">
+    Hello all,
+    </p>
+    <p className="text-base">
+    Today a prayer service in support of our local Ukrainian community was held in Erie’s central park, in front of the City Hall.  Several LP Erie employees and friends attended. 
+    </p>
+    <img src="erieteam.jpg" />
+    <p className="text-base">
+    Shown are Ca Seng Mak, Julie Moore, Francisco Reyes, friend and donor Laura Schaaf, Gretchen Seth, Julie Slomski, Natalya Voyetz (Vlad Yakunin’s mom), Pat O’Neil and Oscar!  (Gib Loesel left before the photo was taken.)
+    </p>
+    <img src="IMG_0306.jpg" />
+    <p className="text-base">
+    Our mayor, Joe Schember, (in the above photo) pointed up to his office on the fourth floor of City Hall.  He held up a Ukrainian flag, and told everyone that he would put it in his office window until this crisis is over.  He asked me to send his best wishes to all of our LP Ukraine team members!
+    </p>
+    <p className="text-base">
+    There were songs and hymns.  There were passionate speeches and beautiful prayers.
+    </p>
+    <p className="text-base">
+    One of the speakers told a favorite story of mine, about a little girl picking up starfish from the beach and throwing them back into the ocean so they would not die.  A man watching her said, “why are you doing that?  Can’t you see there are thousands of starfish on the beach?  You can’t save all of them.”  The little girl picked up another starfish, threw it into the ocean and said, “maybe not, but I just saved that one!”  Please don’t stop praying and donating to our friends.  All of our small efforts will add up to a big impact.  Ukraine may be far away, but the Ukrainian people are right here in our hearts!
+    </p>
+    <p className="text-base">
+    Thank you,
+    </p>
+    <p className="text-base">
+    G
+    </p>
+    `
+  },
+  {
+    id: '0003',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Fri, Mar 4, 7:45 PM',
+    title: 'Gretchen’s Friday report',
+    body: `
+    <p className="text-base">
+    Hi all,
+    </p>
+    <p className="text-base">
+    There was no report yesterday, as we have been busy with coordination efforts.  Going forward, I will report periodically if not daily.
+    </p>
+    <p className="text-base">
+    We continue to report good news:  the young woman we mentioned on Wednesday crossed the border safely and is now in Rseszow, in an apartment with her mom and her dog, Archibald.  They are resting today after their long journey.  The first three teammates who crossed last weekend are settling into their new apartment, and are already cooking Ukrainian specialties for their Polish hosts!
+    </p>
+    <p className="text-base">
+    A big shout out to Moustafa Elhadary and Brendan Burbules, who created our fundraising page in a matter of hours over last weekend. From Moustafa:
+    “Jim sent me an email Saturday Feb 26 around noon asking if we can setup a website to collect funds.  I looked into it with Brendan and for various reasons realized the only way to do it was to code and build a site from scratch.  So I started coding around 8PM and by 3:43AM the site was live and ready to go.  At 4:23AM Sunday morning Jim sent out the email to everyone and funds instantaneously started coming through”.  All in a day’s (or night’s!) work for our amazing IT professionals.  Thank you both!
+    </p>
+    <p className="text-base">
+    Donations continue to come in, including $10,000 from some friends in Erie, and $25,000 from one of LP’s larger customers, raising the total to nearly $575,000. In all, there have been over 250 individual donations so far, and they are making a tremendous difference. Thank you!
+    </p>
+    <p className="text-base">
+    Our Ukraine team supports multiple LP customers, one of the largest is Google. Please take a look at all the beautiful comments they posted in support of our teammates!
+    </p>
+    <p className="text-base">
+    <a href="https://docs.google.com/document/d/1CitLvf5zE_v0YHP3YN9kVJIFziRRF5dXMgISNEWbBno/edit#heading=h.tsn1tys7mtnb">Google Docs Link</a>
+    </p>
+    <p className="text-base">
+    These are very uncertain times for our employees and their countrymen and women.  Their actions inspire the world. Please keep them in your thoughts and prayers, and as always, thank you for your support!
+    </p>
+    <p className="text-base">
+    G
+    </p>
+    `
+  },
+  {
+    id: '0002',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Wed, Mar 2, 4:00 PM',
+    title: 'Dear All',
+    body: `
+    <p className="text-base">
+    I have received many kind emails thanking me for these reports, but as I tell everyone, I am only the messenger.  We have a whole team dedicated to this effort, working long hours on their own time to help out.  I would like to recognize this core team, which also has lots of support from other LP folks both here in HQ and from all over the world:
+    </p>
+    <p className="text-base">
+    Emile Zafirov (from Bulgaria) is our CIO, living in North Carolina; Heiko Mueller is MD of our Germany office. Ivan Nemeth (from Hungary), Jim Berlin (our CEO), Julie Slomski, Maria Czerwinski, Tracy Coffy and I are all in Erie; Michal Smid (from Czech Republic) worked for us in Erie and now does so from CZ; Pawel Wronski manages our Rzeszow, Poland office.  We all are working to support Volodymyr (Vova) Bohovych and his team in our Ukraine office in Ivano-Frankivsk. 
+    </p>
+    <p className="text-base">
+    There are also three people on the team who are NOT LP employees but we wish they were:  Zsigmond Balla, president and CEO of Ziglift, is from Hungary but living in the US, and is well-connected to many resources all over Europe; Ola Sieradzka from Poland was an intern in our Erie office (at the age of 16!) and has been a dear friend ever since.  She has done an enormous amount of travel and coordination for the first groups arriving in Poland.  Thank you, Ola!
+    </p>
+    <p className="text-base">
+    But to help Ola get back to her “day job” at HSBC we have just acquired our newest team member, Ola’s BEST friend Inna Zaripova, who is a Ukraine native currently living in Boise, Idaho.  Inna speaks Ukrainian, Russian, German, Polish and English, and will be of great help to us in communicating with our travelers and their helpers along the way.  
+    </p>
+    <p className="text-base">
+    It has been amazing to see the creativity and selfless acts that have come out of this team effort.  We can’t say it enough:  thank you!
+    </p>
+    <p className="text-base">
+    Slava Ukrayini!
+    </p>
+    <p className="text-base">
+    G
+    </p>
+    `
+  },
+  {
+    id: '0001',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Wed, Mar 2, 12:00 PM',
+    title: 'Gretchen’s Wednesday report',
+    body: `
+    <p className="text-base">
+    Hi all,
+    </p>
+    <p className="text-base">
+    It’s been a great week so far.  I have been brushing up on my eastern European geography and spellings of place names! 😊  For you Google Maps geeks, our next group (one LP Ukraine employee, her mom and a dog) are currently 100 km from the Ukraine/Poland border at Korczowa-Kracovets.  From there they will go to Rzeszow, Poland, where the amazing Pawel has miraculously secured an apartment, as he says, by “pure luck”, as thousands of people are coming into the city, and everyone is looking for housing!
+    </p>
+    <p className="text-base">
+    Thank you to LP Germany, for organizing a truckload of relief supplies with the help of one of their clients.  It will likely be sent to Romania to be distributed to Ukrainian refugees arriving there.
+    </p>
+    <p className="text-base">
+    And thanks to everyone who is passing along the donation website info.  We continue to receive funds from all over the world, and we promise to be good stewards of this money.
+    </p>
+    <p className="text-base">
+    G
+    </p>
+    <p className="text-base">
+    PS—LP Poland ROCKS, but so does this group of brave Ukrainian soldiers. The spirit of the Ukrainian people at this time of conflict is truly inspiring.
+    </p>
+    <p className="text-base">    
+    https://www.linkedin.com/posts/james-clutterbuck-monaco_ive-seen-everything-now-ukrainian-soldiers-activity-6903645906391183360-qSBw
+    </p>
+    `
+  },
+  {
     id: '18898161213243342',
     author: {
       name: 'Jim Berlin',
