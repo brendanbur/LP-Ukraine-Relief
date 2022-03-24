@@ -3,6 +3,49 @@ import React from 'react'
 
 const updates = [
   {
+    id: '0013',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Thur, Mar 24, 1:15 PM',
+    title: 'Gretchen’s report from Poland - Day 2',
+    body: `
+      <p className="text-base">
+      Today we made our way to two border crossing points: Korczowa and Medyka.  Words cannot adequately describe what we saw there, but I will try!
+      </p>
+      <p className="text-base">
+      Korczowa is well organized, with an immense refugee center, and buses leaving hourly to multiple cities.  We were “escorted” by special police (Polish FBI) when they saw our cameras but they were very polite and told us all about the center and auxiliary housing tents there. 
+      </p>
+      <p className="text-base">
+      Medyka is more chaotic, and the sheer number of volunteers there is incredible: we saw people from Spain, India, Germany, Norway, Israel, Taiwan, USA, Canada, Holland, Austria and Ukraine.
+      </p>
+      <img src="pol_1_0.jpg" />
+      <p className="text-base">
+      This is the automobile crossing point. 
+      </p>
+      <img src="pol_1_1.jpg" />
+      <p className="text-base">
+      This is the pedestrian crossing point.  It was pretty calm today, but two weeks ago there were tens of thousands of people here!
+      </p>
+      <img src="pol_1_2.jpg" />
+      <img src="pol_1_3.jpg" />
+      <p className="text-base"> 
+      We helped these guys load shopping carts full of supplies and rolled them through the dirt to the pedestrian border road. Vans were waiting on the other side to take them to Kyiv. 
+      </p>
+      <p className="text-base">
+      Many volunteers were not affiliated with any group; they just showed up to help. We met three young guys from Alaska, Arizona and even Elmira, NY! 
+      </p>
+      <p className="text-base">
+      We met a German doctor who is using his month-long vacation to shuttle medical supplies to a hospital in Lviv. 
+      </p>
+      <p className="text-base">
+      From where we stood, it is plain to see that the WORLD is supporting Ukraine!
+      </p>
+    `
+  },
+  {
     id: '0012',
     author: {
       name: 'Gretchen Seth',
