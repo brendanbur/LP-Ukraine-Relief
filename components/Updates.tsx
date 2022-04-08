@@ -3,6 +3,145 @@ import React from 'react'
 
 const updates = [
   {
+    id: '0017',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Wed, Apr 6, 1:22 PM',
+    title: 'The story continues...',
+    body: `
+      <p className="text-base">
+      Hi all,
+      </p>
+      <p className="text-base">
+      I am back in Erie and I have some happy news: today a full 40’ hi-cube container of humanitarian aid worth over $100,000 was loaded and shipped from the Erie Times-News warehouse!
+      </p>
+      <img src="eri_1_1.jpg" />
+      <p className="text-base">
+      It will go directly from Erie to New York, then sail to Gdynia. From there it will travel by truck to our our sister-city friends in Lublin, Poland. Our warehouse staff was on hand to watch it leave!
+      </p>
+      <img src="eri_1_2.jpg" />
+      <p className="text-base">
+      This donation effort was led by Rep. Bob Merski, and supported by our local Polish clubs as well as other Erieites.  
+      </p>
+      <img src="eri_1_3.jpg" />
+      <p className="text-base">
+      We hope this is the first of several containers we will ship to Lublin, to support the over 30,000 Ukrainian refugees now living there. 
+      </p>
+      <p className="text-base">
+      Thanks to all for your continuing support. The need grows greater every day, and your donations WILL make a difference!
+      </p>
+      <p className="text-base">
+      Thanks,
+      </p>
+      <p className="text-base">
+      G
+      </p>
+    `
+  },
+  {
+    id: '0016',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Wed, Mar 30, 10:45 AM',
+    title: 'Gretchen’s final report',
+    body: `
+      <p className="text-base">
+      I am passing through Germany on my way back to the USA, and everywhere there are messages of support for Ukraine: flags are hanging from highway overpasses, digital sign boards display messages of solidarity, people are wearing yellow and blue ribbons.  
+      </p>
+      <img src="pol_4_1.jpg" />
+      <img src="pol_4_2.jpg" />
+      <img src="pol_4_3.jpg" />
+      <p className="text-base">
+      Thank you from the bottom of our hearts for all your wishes, prayers and emails during this journey. We hope you will continue your support in the weeks and months ahead. 
+      </p>
+      <p className="text-base">
+      Thank you,
+      </p>
+      <p className="text-base">
+      Gretchen, Inna, Ola, Pawel, Mykola and Illya
+      </p>
+    `
+  },
+  {
+    id: '0015',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Sat, Mar 26, 10:15 AM',
+    title: 'Gretchen’s report from Poland - Day 4',
+    body: `
+      <p className="text-base">
+      Reunion day
+      </p>
+      <p className="text-base">
+      The past few weeks have been challenging for our Ukraine team members as they made their way into Poland, some with family members and pets. 
+      </p>
+      <p className="text-base">
+      Last night I had the privilege of meeting five of our travelers in person. We gave them LP t-shirts which they immediately put on - they loved them! 
+      </p>
+      <p className="text-base">
+      They are all settled into their apartment, working remotely and continuing to keep things moving for Project Cargo, CSI, Siemens and numerous others. Girl power! 💪
+      </p>
+      <img src="pol_3_1.jpg" />
+      <p className="text-base">
+      Our Rzeszow office has been supported by longtime LP employee Illya Samko, and by our newest team member, Mykola Kosenko. Together they are doing great things for Ukraine, acquiring vital equipment and raising funds for more.  Here is the whole gang at a group dinner last night. 
+      </p>
+      <img src="pol_3_2.jpg" />
+      <p className="text-base">
+      Thank you for all the encouraging emails and texts. They really matter to all of us!
+      </p>
+      <p className="text-base">
+      G
+      </p>
+    `
+  },
+  {
+    id: '0014',
+    author: {
+      name: 'Gretchen Seth',
+      imageUrl: '/gs.jpg',
+      title: 'Sr. VP, International at Logistics Plus',
+    },
+    date: 'Fri, Mar 25, 7:15 PM',
+    title: 'Gretchen’s report from Poland - Day 3',
+    body: `
+      <p className="text-base">
+      GRASSROOTS. That is the word for much of what is happening here. Many people, doing many very small things, are making a huge difference:
+      </p>
+      <p className="text-base">
+      A Ukrainian retiree, working with funds from a Canadian credit union, bought a generator and some supplies, put them in his personal car and drove them into Ukraine. 
+      </p>
+      <img src="pol_2_1.jpg"/>
+      <img src="pol_2_2.jpg"/>
+      <p className="text-base">
+      A woman from Asheville NY arrived two weeks ago and has already made a dozen trips to/from Ukraine, ferrying supplies and refugees, securing housing and procuring needed items for over 50 individuals.
+      </p>
+      <p className="text-base">
+      An academic from the University of Oregon rerouted from his vacation in Paris to help at the border for a month. 
+      </p>
+      <p className="text-base">
+      None of these people are associated with any organization. They came without a plan, and are now busy morning to night, supporting people they don’t know, in a country most people are currently avoiding. 
+      </p>
+      <p className="text-base">
+      I am reassured by my Ukrainian friends that their efforts are having a positive impact on the resolve of the Ukrainian people. 
+      </p>
+      <p className="text-base">
+      I am grateful to these anonymous, generous heroes. They give me hope. 
+      </p>
+      <p className="text-base">
+      Gretchen Seth
+      </p>
+    `
+  },
+  {
     id: '0013',
     author: {
       name: 'Gretchen Seth',
