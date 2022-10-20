@@ -3,6 +3,30 @@ import React from 'react'
 
 const updates = [
   {
+    id: '0018',
+    author: {
+      name: 'Aleksandra Kenig',
+      imageUrl: '/ak.jpg',
+      title: 'Managing Director of Logistics PlusPoland',
+    },
+    date: 'Thurs, Oct 18, 11:42 AM',
+    title: 'A Message From LP Poland',
+    body: `
+      <p className="text-base">
+      We are calling on our friends all over the world to help continue supporting Ukraine. 
+      </p>
+      <p className="text-base">
+      LP Poland is currently working to raise funds for a shelter for refugee women and children who are evacuating Kharkov, Kherson, Mariupol, and other occupied regions. This Soviet-era shelter houses 16 women and 34 children.
+      </p>
+      <p className="text-base">
+      They are in desperate need of household goods, toiletries, children’s items, and other humanitarian aid. 
+      </p>
+      <p className="text-base">
+      “We are praying for peace, for our defenders, as well as for volunteers and benefactors who help us survive. Thank you in advance for your help. May God protect Ukraine and everyone. Together we are invincible!” -LP Poland
+      </p>
+    `
+  },
+  {
     id: '0017',
     author: {
       name: 'Gretchen Seth',
