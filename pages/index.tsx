@@ -1,19 +1,16 @@
 import { FireIcon, HeartIcon, ShareIcon } from '@heroicons/react/solid'
 import DonationsPopup from 'components/DonationsPopup'
+import ProgressBar from 'components/ProgressBar'
 import SharePopup from 'components/SharePopup'
 import Updates from 'components/Updates'
-import { formatMoney } from 'lib/helpers'
+import { getDonations } from 'lib/server'
 import moment from 'moment'
 import { InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { extractSheets } from 'spreadsheet-to-json'
-import { Donation } from 'types'
-
-const GOAL_TOTAL = 550000.0
 
 const Index = ({
   fallbackData,
@@ -21,11 +18,6 @@ const Index = ({
   const donations = fallbackData.donations
   const [shareOpen, setShareOpen] = useState(false)
   const [donationsOpen, setDonationsOpen] = useState(false)
-  const [percentage, setPercentage] = useState(0);
-
-  const donationTotal = donations
-    .map((d) => +d.mc_gross)
-    .reduce((acc, donation) => acc + donation)
 
   const donationsShortList = () => {
     const recent = donations
@@ -51,27 +43,6 @@ const Index = ({
     }).length
   }
 
-  const progressBar1Ref = useRef<HTMLDivElement>(null)
-  const progressBar2Ref = useRef<HTMLDivElement>(null)
-
-  function updateProgressBar() {
-    const progressBar1 = progressBar1Ref.current // corresponding DOM node
-    const progressBar2 = progressBar2Ref.current // corresponding DOM node
-    const local_percentage = Math.floor((donationTotal / GOAL_TOTAL) * 100)
-    setPercentage(local_percentage)
-    if (progressBar1) {
-      progressBar1.style.width = `${local_percentage}%`
-    }
-    if (progressBar2) {
-      progressBar2.style.width = `${local_percentage}%`
-    }
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      updateProgressBar()
-    }, 500)
-  }, [])
   return (
     <>
       <ToastContainer />
@@ -162,27 +133,7 @@ const Index = ({
                       <section aria-labelledby="who-to-follow-heading">
                         <div className="rounded-lg bg-white shadow">
                           <div className="space-y-3 p-6">
-                            <h2 className="text-base font-medium text-gray-900">
-                              <span className="text-2xl font-extrabold">
-                                {formatMoney(donationTotal)}
-                                {'   '}
-                              </span>{' '}
-                              <span className="text-sm text-gray-500">
-                                raised of {formatMoney(GOAL_TOTAL)} goal ({percentage}%)
-                              </span>
-                            </h2>
-                            <div className="relative h-2 overflow-hidden rounded-full">
-                              <div className="absolute h-full w-full bg-gray-200"></div>
-                              <div
-                                ref={progressBar2Ref}
-                                id="bar"
-                                style={{ width: '0%' }}
-                                className="relative h-full bg-blue-500 transition-all duration-1000 ease-out"
-                              ></div>
-                            </div>
-                            <div className="text-lg">
-                              {donations.length} donations
-                            </div>
+                            <ProgressBar donations={donations} />
                             <div className="flex flex-col items-center space-y-4">
                               <a
                                 href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
@@ -315,27 +266,7 @@ const Index = ({
                 <section aria-labelledby="who-to-follow-heading">
                   <div className="rounded-lg bg-white shadow-xl">
                     <div className="space-y-3 p-6">
-                      <h2 className="text-base font-medium text-gray-900">
-                        <span className="text-2xl font-extrabold">
-                          {formatMoney(donationTotal)}
-                          {'   '}
-                        </span>{' '}
-                        <span className="text-sm text-gray-500">
-                          raised of {formatMoney(GOAL_TOTAL)} goal ({percentage}%)
-                        </span>
-                      </h2>
-                      <div className="relative h-2 max-w-xl overflow-hidden rounded-full">
-                        <div className="absolute h-full w-full bg-gray-200"></div>
-                        <div
-                          ref={progressBar1Ref}
-                          id="bar"
-                          style={{ width: '0%' }}
-                          className="relative h-full bg-blue-500 transition-all duration-1000 ease-out"
-                        ></div>
-                      </div>
-                      <div className="text-lg">
-                        {donations.length} donations
-                      </div>
+                      <ProgressBar donations={donations} />
                       <div className="flex flex-col items-center space-y-4">
                         <a
                           href="https://www.paypal.com/donate/?hosted_button_id=PJNGWRVDL624E"
@@ -454,24 +385,7 @@ const Index = ({
 export default Index
 
 export const getStaticProps = async () => {
-  const credentials = JSON.parse(
-    Buffer.from(process.env.GOOGLE_SERVICE_KEY!, 'base64').toString()
-  )
-  const donations: Donation[] = (
-    await extractSheets({
-      spreadsheetKey: process.env.SHEET_KEY,
-      credentials: credentials,
-      sheetsToExtract: ['donations'],
-    })
-  ).donations.map((d: any) => {
-    return {
-      id: Math.floor(Math.random() * 5000) + d.ipn_track_id + Math.floor(Math.random() * 500),
-      name: d.first_name + ' ' + d.last_name,
-      date: moment(d.payment_date).fromNow(),
-      mc_gross: +d.mc_gross,
-      payment_date: d.payment_date,
-    }
-  })
+  const donations = await getDonations(process.env.GOOGLE_SERVICE_KEY!)
 
   return {
     props: { fallbackData: { donations } },
