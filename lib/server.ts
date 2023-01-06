@@ -1,6 +1,7 @@
 import moment from 'moment'
 import { extractSheets } from 'spreadsheet-to-json'
 import { Donation } from 'types'
+import { FILTER_DONATION_DATE } from './constants'
 
 export const getDonations = async (serviceKey: string) => {
   const credentials = JSON.parse(Buffer.from(serviceKey, 'base64').toString())
@@ -21,7 +22,7 @@ export const getDonations = async (serviceKey: string) => {
       mc_gross: +d.mc_gross,
       payment_date: d.payment_date,
     }
-  })
+  }).filter( (d: Donation) => (new Date(d.payment_date) > FILTER_DONATION_DATE));
 
   return donations
 }

@@ -383,9 +383,8 @@ export default Index
 
 export const getStaticProps = async () => {
   const donations = await getDonations(process.env.GOOGLE_SERVICE_KEY!)
-  const filteredDonations = donations.filter(d => (new Date(d.payment_date) > FILTER_DONATION_DATE));
   return {
-    props: { fallbackData: { donations: filteredDonations } },
+    props: { fallbackData: { donations } },
     revalidate: 10,
   }
 }
