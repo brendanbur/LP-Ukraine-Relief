@@ -252,31 +252,7 @@ const Index = ({
                       </section>
                     </div>
                   </aside>
-                  <div className="">
-                    <h2 className="text-lg font-bold tracking-tight text-gray-900 ">
-                      A few words from Logistics Plus
-                    </h2>
-                    <div className="mt-6 space-y-6 text-gray-500">
-                      <p className="text-base">
-                        Logistics Plus employs about 50 people in Ukraine. Most
-                        of them are under the age of 35.
-                      </p>
-                      <p className="text-base leading-7">
-                        For a while many thought the invasion wouldn't happen,
-                        and then they thought it would happen mostly in the
-                        eastern part of the country.
-                      </p>
-                      <p className="text-base leading-7">
-                        But now with Kyiv being bombarded, the feeling has
-                        changed. Logistics Plus employees could hear explosions
-                        from their offices since Wednesday night.
-                      </p>
-                      <p className="text-base leading-7">
-                        This fund will provide our colleagues in Ukraine support
-                        for any of their needs during this time of war.
-                      </p>
-                    </div>
-                  </div>
+                 
                   <Updates />
                 </div>
               </div>
