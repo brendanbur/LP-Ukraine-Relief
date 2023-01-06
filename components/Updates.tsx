@@ -341,7 +341,7 @@ const updates = [
       In other good news, our relief fund has now exceeded US$637,000.  What an amazing achievement! Please keep the donations coming, as we have lots of good uses for the funds--helping out on both sides of the border.  
       </p>
       <p className="text-base">
-      We made up some nice Ukraine t-shirts for our employees, so we decided to gather for a group message of solidarity this morning.  Here is the video – don’t blink or you will miss it 😊 <a href="https://www.tiktok.com/@logisticsplus/video/7075716436165004590">https://www.tiktok.com/@logisticsplus/video/7075716436165004590</a>   
+      We made up some nice Ukraine t-shirts for our employees, so we decided to gather for a group message of solidarity this morning.  <a href="https://www.tiktok.com/@logisticsplus/video/7075716436165004590">Here is the video</a> – don’t blink or you will miss it 😊 
       </p>
       <p className="text-base">
       I will be heading to Poland next week to visit our newly arrived teammates in Poland, and bring messages of encouragement to all those remaining in Ukraine. I will try my best to convey the magnitude of the feelings expressed by all of LP and our friends and customers throughout the world.  Your support means the world to us.  Slave Ukrayini!
