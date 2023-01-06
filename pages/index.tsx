@@ -122,7 +122,7 @@ const Index = ({
                     <div className="md:grid-cols-12 md:grid">
                       <div className="md:col-span-8 space-y-5">
                         <p className="text-lg text-gray-500">
-                          Most people in Ukraine only have enough power for only few hours a day. Many more sit in the darkness and in the cold because there is no heat. In these conditions, hospitals and schools cannot function. Your support helped us raise $662,810 for Ukraine relief efforts in 2022. Now, your 2023 donations will go directly towards the purchase and installation of power generators to help Ukrainians in this time of need.  Thank you!
+                          Most people in Ukraine only have enough power for a few hours a day. Many more sit in  darkness and in the cold because there is no heat. In these conditions, hospitals and schools cannot function. Your support helped us raise $662,810 for Ukraine relief efforts in 2022. Now, your 2023 donations will go directly towards the purchase and installation of power generators to help Ukrainians in this time of need.  Thank you!
                         </p>
                         <p className="text-lg">
                           #LetsRebuildUkraineTogether
