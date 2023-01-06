@@ -7,9 +7,11 @@ const ProgressBar = ({ donations }: { donations: Donation[] }) => {
   const progressBarRef = React.useRef<HTMLDivElement>(null)
   const [percentage, setPercentage] = useState(0)
 
-  const donationTotal = donations
+  const donationTotal = donations.length > 0 ?
+    donations
     .map((d) => +d.mc_gross)
-    .reduce((acc, donation) => acc + donation)
+    .reduce((acc, donation) => acc + donation) 
+    : 0;
 
   function updateProgressBar() {
     const progressBar = progressBarRef.current // corresponding DOM node
