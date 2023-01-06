@@ -3,12 +3,13 @@ import DonationsPopup from 'components/DonationsPopup'
 import ProgressBar from 'components/ProgressBar'
 import SharePopup from 'components/SharePopup'
 import Updates from 'components/Updates'
+import { FILTER_DONATION_DATE } from 'lib/constants'
 import { getDonations } from 'lib/server'
 import moment from 'moment'
 import { InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -19,7 +20,10 @@ const Index = ({
   const [shareOpen, setShareOpen] = useState(false)
   const [donationsOpen, setDonationsOpen] = useState(false)
 
-  const donationsShortList = () => {
+  const donationsShortList = useMemo(() => {
+    if (donations.length === 0) {
+      return null;
+    }
     const recent = donations
       .sort(function (left, right) {
         return moment
@@ -32,8 +36,7 @@ const Index = ({
       return +prev.mc_gross > +current.mc_gross ? prev : current
     })
     return [{ ...highest, comment: 'Top donation' }, ...recent]
-  }
-
+  }, [])
   const totalDonationsInPastDay = () => {
     const today = moment().startOf('day')
     const yesterday = moment().subtract(1, 'day').startOf('day')
@@ -107,23 +110,40 @@ const Index = ({
 
         <div className="py-10">
           <div className="mx-auto max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8">
-            {/*  */}
+
             <main className="px-2 md:col-span-12 lg:col-span-8">
               <div className="mt-4">
                 <div className="space-y-8">
                   <div className="space-y-5 sm:space-y-4 md:max-w-3xl lg:max-w-none">
+
                     <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                      LP Ukraine Family Relief
+                      Let&apos;s Rebuild Ukraine Together!
                     </h2>
-                    <p className="text-lg text-gray-500">
-                      The LP Ukraine team at the holiday party in Ivano
-                      Frankivsk, Ukraine in December 2021
-                    </p>
+                    <div className="md:grid-cols-12 md:grid">
+                      <div className="md:col-span-8 space-y-5">
+                        <p className="text-lg text-gray-500">
+                          Most people in Ukraine only have enough power for only few hours a day. Many more sit in the darkness and in the cold because there is no heat. In these conditions, hospitals and schools cannot function. Your support helped us raise $662,810 for Ukraine relief efforts in 2022. Now, your 2023 donations will go directly towards the purchase and installation of power generators to help Ukrainians in this time of need.  Thank you!
+                        </p>
+                        <p className="text-lg">
+                          #LetsRebuildUkraineTogether
+                        </p>
+                      </div>
+                      <div className="md:col-span-4">
+                        <img
+                          className="hidden md:block"
+                          src="/generator.png"
+                          alt=""
+                        />
+
+                      </div>
+                    </div>
+
+
                   </div>
                   <h1></h1>
                   <div className="aspect-w-3 aspect-h-2">
                     <img
-                      src="/team.jpg"
+                      src="/lp_team.jpg"
                       className="rounded-lg object-cover shadow-lg"
                       alt="LP Ukraine Family Relief"
                     />
@@ -180,7 +200,7 @@ const Index = ({
                                 role="list"
                                 className=" divide-y divide-gray-200"
                               >
-                                {donationsShortList().map((donation) => (
+                                {donationsShortList && donationsShortList.map((donation) => (
                                   <li
                                     key={donation.id}
                                     className="flex items-center space-x-3 py-4"
@@ -232,31 +252,7 @@ const Index = ({
                       </section>
                     </div>
                   </aside>
-                  <div className="">
-                    <h2 className="text-lg font-bold tracking-tight text-gray-900 ">
-                      A few words from Logistics Plus
-                    </h2>
-                    <div className="mt-6 space-y-6 text-gray-500">
-                      <p className="text-base">
-                        Logistics Plus employs about 50 people in Ukraine. Most
-                        of them are under the age of 35.
-                      </p>
-                      <p className="text-base leading-7">
-                        For a while many thought the invasion wouldn't happen,
-                        and then they thought it would happen mostly in the
-                        eastern part of the country.
-                      </p>
-                      <p className="text-base leading-7">
-                        But now with Kyiv being bombarded, the feeling has
-                        changed. Logistics Plus employees could hear explosions
-                        from their offices since Wednesday night.
-                      </p>
-                      <p className="text-base leading-7">
-                        This fund will provide our colleagues in Ukraine support
-                        for any of their needs during this time of war.
-                      </p>
-                    </div>
-                  </div>
+                 
                   <Updates />
                 </div>
               </div>
@@ -309,7 +305,7 @@ const Index = ({
 
                       <div className="mt-9 flow-root">
                         <ul role="list" className=" divide-y divide-gray-200">
-                          {donationsShortList().map((donation) => (
+                          {donationsShortList && donationsShortList.map((donation) => (
                             <li
                               key={donation.id}
                               className="flex items-center space-x-3 py-4"
@@ -384,9 +380,9 @@ const Index = ({
 
 export default Index
 
+
 export const getStaticProps = async () => {
   const donations = await getDonations(process.env.GOOGLE_SERVICE_KEY!)
-
   return {
     props: { fallbackData: { donations } },
     revalidate: 10,
